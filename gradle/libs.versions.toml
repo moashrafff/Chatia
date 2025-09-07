@@ -14,6 +14,7 @@ junit = "4.13.2"
 kotlin = "2.2.0"
 ktor = "3.2.2"
 logback = "1.5.18"
+chatia-ui-components = "0.0.1"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -30,6 +31,9 @@ logback = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
 ktor-serverCore = { module = "io.ktor:ktor-server-core-jvm", version.ref = "ktor" }
 ktor-serverNetty = { module = "io.ktor:ktor-server-netty-jvm", version.ref = "ktor" }
 ktor-serverTestHost = { module = "io.ktor:ktor-server-test-host-jvm", version.ref = "ktor" }
+
+# UI Components
+chatia-ui-components = { module = "io.github.moashrafff:chatia-ui-components", version.ref = "chatia-ui-components" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
