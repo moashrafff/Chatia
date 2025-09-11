@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Chatia</string>
+    <string name= "instant_answers_title">Instant Answers</string>
+    <string name="instant_answers_description">Get quick, accurate responses to your questions in real-time.</string>
+    <string name="personalized_advice_title">Personalized Advice</string>
+    <string name="personalized_advice_description">Receive tailored insights and advice based on your preferences and needs.</string>
+    <string name="inspiration_any_time_title">Inspiration Anytime</string>
+    <string name="inspiration_any_time_description">Find fresh ideas, motivation, and creative solutions whenever you need them.</string>
+    <string name="register">Register</string>
+    <string name="login">Login</string>
+</resources>
