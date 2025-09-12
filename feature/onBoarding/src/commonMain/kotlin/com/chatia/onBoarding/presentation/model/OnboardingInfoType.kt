@@ -1,4 +1,4 @@
-package com.chatia.onBoarding.presentation.infoType
+package com.chatia.onBoarding.presentation.model
 
 import cahatia.feature.onboarding.generated.resources.Res
 import cahatia.feature.onboarding.generated.resources.bubble

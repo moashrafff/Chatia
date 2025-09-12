@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
+
 }
 
 kotlin {
@@ -22,7 +23,7 @@ kotlin {
         iosSimulatorArm64()
     ).forEach { iosTarget ->
         iosTarget.binaries.framework {
-            baseName = "onBoarding"
+            baseName = "domain"
             isStatic = true
         }
     }
@@ -39,15 +40,9 @@ kotlin {
             implementation(libs.androidx.lifecycle.runtimeCompose)
             implementation(projects.shared)
 
-            // UI Components
-            implementation(libs.chatia.ui.components)
-
             // Koin
             api(libs.koin.core)
-            implementation(libs.koin.compose)
-            implementation(libs.koin.compose.viewmodel)
 
-            implementation(project(":core:presentation"))
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -56,7 +51,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.chatia.onBoarding"
+    namespace = "com.chatia.domain"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {

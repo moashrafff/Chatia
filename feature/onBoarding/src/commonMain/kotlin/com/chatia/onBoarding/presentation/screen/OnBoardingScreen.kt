@@ -29,8 +29,9 @@ import cahatia.feature.onboarding.generated.resources.login
 import cahatia.feature.onboarding.generated.resources.on_boarding_description
 import cahatia.feature.onboarding.generated.resources.on_boarding_title
 import cahatia.feature.onboarding.generated.resources.register
-import com.chatia.onBoarding.presentation.OnBoardingInfoCard
-import com.chatia.onBoarding.presentation.infoType.OnboardingInfoType
+import com.chatia.onBoarding.presentation.component.OnBoardingInfoCard
+import com.chatia.onBoarding.presentation.model.OnboardingInfoType
+import com.chatia.onBoarding.presentation.protocol.OnBoardingIntent
 import com.chatia.presentation.applyIf
 import com.chatia.presentation.models.UiText
 import com.chatia.presentation.models.asString
@@ -41,7 +42,7 @@ import com.chatia.ui.components.verticalGradientStops
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
-fun OnBoardingScreen() {
+fun OnBoardingScreen(sendIntent: (OnBoardingIntent) -> Unit) {
     Column(
         modifier = Modifier
             .verticalGradientStops(
@@ -97,7 +98,7 @@ fun OnBoardingScreen() {
             PrimaryButton(
                 modifier = Modifier.weight(1f),
                 text = UiText.Resource(res = Res.string.login).asString(),
-                onClick = {},
+                onClick = {sendIntent.invoke(OnBoardingIntent.LoginButtonClicked)},
                 textFontWeight = FontWeight.Normal,
                 textFontSize = 16.sp,
                 textColor = MaterialTheme.colorScheme.onSurface,
@@ -112,7 +113,7 @@ fun OnBoardingScreen() {
             PrimaryButton(
                 modifier = Modifier.weight(1f),
                 text = UiText.Resource(res = Res.string.register).asString(),
-                onClick = {},
+                onClick = {sendIntent.invoke(OnBoardingIntent.RegisterButtonClicked)},
                 textFontWeight = FontWeight.Normal,
                 textFontSize = 16.sp,
                 contentPadding = PaddingValues(vertical = 12.dp)

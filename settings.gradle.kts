@@ -34,8 +34,10 @@ dependencyResolutionManagement {
 }
 
 include(":core:presentation")
+include(":core:domain")
 include(":core:navigator")
 include(":feature:onBoarding")
+include(":feature:login")
 include(":composeApp")
 include(":server")
 include(":shared")

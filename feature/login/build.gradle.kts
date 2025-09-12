@@ -1,12 +1,12 @@
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+        import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
-plugins {
-    alias(libs.plugins.kotlinMultiplatform)
-    alias(libs.plugins.androidLibrary)
-    alias(libs.plugins.composeMultiplatform)
-    alias(libs.plugins.composeCompiler)
-}
+        plugins {
+            alias(libs.plugins.kotlinMultiplatform)
+            alias(libs.plugins.androidLibrary)
+            alias(libs.plugins.composeMultiplatform)
+            alias(libs.plugins.composeCompiler)
+        }
 
 kotlin {
     androidTarget {
@@ -22,7 +22,7 @@ kotlin {
         iosSimulatorArm64()
     ).forEach { iosTarget ->
         iosTarget.binaries.framework {
-            baseName = "onBoarding"
+            baseName = "login"
             isStatic = true
         }
     }
@@ -56,7 +56,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.chatia.onBoarding"
+    namespace = "com.chatia.login"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {
