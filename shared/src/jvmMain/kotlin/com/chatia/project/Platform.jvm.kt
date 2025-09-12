@@ -7,3 +7,4 @@ class JVMPlatform: Platform {
 actual fun getPlatform(): Platform = JVMPlatform()
 
 actual fun isIOS(): Boolean = false
+actual fun isAndroid(): Boolean  = false

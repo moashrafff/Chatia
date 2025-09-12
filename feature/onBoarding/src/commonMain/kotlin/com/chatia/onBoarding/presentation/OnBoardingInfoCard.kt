@@ -1,4 +1,4 @@
-package com.chatia.project
+package com.chatia.onBoarding.presentation
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -17,7 +17,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.chatia.project.presentation.infoType.OnboardingInfoType
+import com.chatia.onBoarding.presentation.infoType.OnboardingInfoType
+import com.chatia.presentation.models.asString
 import com.chatia.ui.components.cards.PrimaryCard
 import com.chatia.ui.components.texts.PrimaryText
 import org.jetbrains.compose.resources.painterResource

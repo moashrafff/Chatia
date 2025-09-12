@@ -1,4 +1,4 @@
-package com.chatia.project
+package com.chatia.presentation
 
 import androidx.compose.ui.Modifier
 

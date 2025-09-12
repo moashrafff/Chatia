@@ -1,4 +1,4 @@
-package com.chatia.project
+package com.chatia.presentation.models
 
 import androidx.compose.runtime.Composable
 import org.jetbrains.compose.resources.StringResource

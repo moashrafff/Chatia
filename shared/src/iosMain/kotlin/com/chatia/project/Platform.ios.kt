@@ -9,3 +9,4 @@ class IOSPlatform: Platform {
 actual fun getPlatform(): Platform = IOSPlatform()
 
 actual fun isIOS(): Boolean = true
+actual fun isAndroid(): Boolean = false
