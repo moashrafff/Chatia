@@ -32,7 +32,7 @@ fun AppScaffold(
 ) {
     val navController = rememberNavController()
 
-    LaunchedEffect(navController) {
+    LaunchedEffect(navController)  {
         appNavigator.destinations.collect { event ->
             when (event) {
                 is NavigationEvent.Directions -> {
