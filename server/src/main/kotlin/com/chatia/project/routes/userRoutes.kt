@@ -13,6 +13,7 @@ import io.ktor.server.routing.get
 import io.ktor.server.routing.post
 import io.ktor.server.routing.route
 import io.ktor.server.routing.routing
+import kotlinx.serialization.Serializable
 
 
 fun Application.userRoutes(userService: UserService){
@@ -24,7 +25,10 @@ fun Application.userRoutes(userService: UserService){
                 if(user!=null){
                     call.respond(status= HttpStatusCode.Created,message= user)
                 }else{
-                    call.respond(status=HttpStatusCode.Conflict,message= "User Already Exists")
+                    call.respond(status=HttpStatusCode.Conflict,message= ErrorMessage(
+                        errorCode = HttpStatusCode.Conflict.value, errorMessage = "User Already Exists"
+                    )
+                    )
                 }
             }
             post("/login") {
@@ -40,12 +44,22 @@ fun Application.userRoutes(userService: UserService){
                         )
                         call.respond(status = HttpStatusCode.OK, message = res)
                     }else{
-                        call.respond(status = HttpStatusCode.Unauthorized, message = "Invalid Credentials")
+                        call.respond(status = HttpStatusCode.Unauthorized, message = ErrorMessage(
+                            errorCode = HttpStatusCode.Unauthorized.value, errorMessage = "Invalid Credentials"
+                        )
+                        )
                     }
-                }else{
-                    call.respond(status = HttpStatusCode.Unauthorized, message = "Invalid Credentials")
+                }else{ call.respond(status = HttpStatusCode.Unauthorized, message = ErrorMessage(
+                    errorCode = HttpStatusCode.Unauthorized.value, errorMessage = "Invalid Credentials"
+                )
+                )
                 }
             }
         }
     }
 }
+@Serializable
+data class ErrorMessage(
+    val errorCode: Int,
+    val errorMessage: String
+)
