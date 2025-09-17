@@ -14,13 +14,13 @@ junit = "4.13.2"
 kotlin = "2.2.0"
 ktor = "3.2.2"
 logback = "1.5.18"
+# maven-central
 chatia-ui-components = "0.0.1"
-chatia-ui-components-local = "0.0.3-SNAPSHOT"
+# maven-local
+chatia-ui-components-local = "0.0.4-SNAPSHOT"
 navigationCompose = "2.9.0-beta05"
 koin-version = "4.1.0-Beta11"
 koinComposeMultiplatform = "4.1.0"
-
-
 
 
 [libraries]
@@ -38,6 +38,7 @@ logback = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
 ktor-serverCore = { module = "io.ktor:ktor-server-core-jvm", version.ref = "ktor" }
 ktor-serverNetty = { module = "io.ktor:ktor-server-netty-jvm", version.ref = "ktor" }
 ktor-serverTestHost = { module = "io.ktor:ktor-server-test-host-jvm", version.ref = "ktor" }
+compose-material3 = { module = "org.jetbrains.compose.material3:material3", version.ref = "composeMultiplatform" }
 
 # Navigation
 navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "navigationCompose" }

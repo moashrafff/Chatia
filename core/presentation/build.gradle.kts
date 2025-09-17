@@ -31,9 +31,9 @@ kotlin {
         commonMain.dependencies {
             implementation(compose.runtime)
             implementation(compose.foundation)
-            implementation(compose.material3)
+            implementation(libs.compose.material3)
             implementation(compose.ui)
-            implementation(compose.components.resources)
+            implementation(compose.components.resources){}
             implementation(compose.components.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodelCompose)
             implementation(libs.androidx.lifecycle.runtimeCompose)
@@ -60,3 +60,10 @@ android {
         targetCompatibility = JavaVersion.VERSION_11
     }
 }
+
+compose.resources {
+    publicResClass = true
+    packageOfResClass = "com.chatia.presentation.resources"
+    generateResClass = always
+}
+
