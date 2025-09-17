@@ -1,6 +1,7 @@
 package com.chatia.project.routes
 
 import com.chatia.project.config.generateToken
+import com.chatia.project.domain.model.ErrorMessage
 import com.chatia.project.domain.model.LoginRequest
 import com.chatia.project.domain.model.LoginResponse
 import com.chatia.project.domain.model.RegisterRequest
@@ -50,7 +51,8 @@ fun Application.userRoutes(userService: UserService){
                         )
                     }
                 }else{ call.respond(status = HttpStatusCode.Unauthorized, message = ErrorMessage(
-                    errorCode = HttpStatusCode.Unauthorized.value, errorMessage = "Invalid Credentials"
+                    errorCode = HttpStatusCode.Unauthorized.value,
+                    errorMessage = "Invalid Credentials"
                 )
                 )
                 }
@@ -58,8 +60,4 @@ fun Application.userRoutes(userService: UserService){
         }
     }
 }
-@Serializable
-data class ErrorMessage(
-    val errorCode: Int,
-    val errorMessage: String
-)
+
