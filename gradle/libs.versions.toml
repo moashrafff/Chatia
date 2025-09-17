@@ -15,6 +15,13 @@ kotlin = "2.2.0"
 ktor = "3.2.2"
 logback = "1.5.18"
 chatia-ui-components = "0.0.1"
+chatia-ui-components-local = "0.0.3-SNAPSHOT"
+navigationCompose = "2.9.0-beta05"
+koin-version = "4.1.0-Beta11"
+koinComposeMultiplatform = "4.1.0"
+
+
+
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -32,8 +39,18 @@ ktor-serverCore = { module = "io.ktor:ktor-server-core-jvm", version.ref = "ktor
 ktor-serverNetty = { module = "io.ktor:ktor-server-netty-jvm", version.ref = "ktor" }
 ktor-serverTestHost = { module = "io.ktor:ktor-server-test-host-jvm", version.ref = "ktor" }
 
+# Navigation
+navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
+
 # UI Components
-chatia-ui-components = { module = "io.github.moashrafff:chatia-ui-components", version.ref = "chatia-ui-components" }
+chatia-ui-components = { module = "io.github.moashrafff:chatia-ui-components", version.ref = "chatia-ui-components-local" }
+
+#koin
+koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin-version" }
+koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koin-version" }
+koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin-version" }
+koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koinComposeMultiplatform" }
+koin-compose-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koinComposeMultiplatform" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

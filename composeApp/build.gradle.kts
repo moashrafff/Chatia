@@ -31,6 +31,9 @@ kotlin {
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
+
+            implementation(libs.koin.android)
+            implementation(libs.koin.androidx.compose)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -45,6 +48,15 @@ kotlin {
 
             // UI Components
             implementation(libs.chatia.ui.components)
+
+            // Navigation
+            implementation(libs.navigation.compose)
+
+            implementation(project(path = ":feature:onBoarding"))
+            implementation(project(path = ":feature:login"))
+            implementation(project(path = ":core:navigator"))
+            implementation(project(path = ":core:presentation"))
+
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
