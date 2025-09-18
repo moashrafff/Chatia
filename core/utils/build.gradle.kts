@@ -22,16 +22,13 @@ kotlin {
         iosSimulatorArm64()
     ).forEach { iosTarget ->
         iosTarget.binaries.framework {
-            baseName = "presentation"
+            baseName = "utils"
             isStatic = true
         }
     }
 
     sourceSets {
         commonMain.dependencies {
-            // UI Components
-            implementation(libs.chatia.ui.components)
-
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material3)
@@ -42,6 +39,8 @@ kotlin {
             implementation(libs.androidx.lifecycle.runtimeCompose)
             implementation(projects.shared)
 
+            // UI Components
+            implementation(libs.chatia.ui.components)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -50,7 +49,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.chatia.presentation"
+    namespace = "com.chatia.utils"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {
@@ -61,10 +60,3 @@ android {
         targetCompatibility = JavaVersion.VERSION_11
     }
 }
-
-compose.resources {
-    publicResClass = true
-    packageOfResClass = "com.chatia.presentation.resources"
-    generateResClass = always
-}
-

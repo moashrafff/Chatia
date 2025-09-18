@@ -89,7 +89,6 @@ fun OnBoardingScreen(sendIntent: (OnBoardingIntent) -> Unit) {
                 if (index != OnboardingInfoType.entries.lastIndex) Spacer(Modifier.height(12.dp))
             }
         }
-
         Row(
             modifier = Modifier.padding(horizontal = 6.dp),
             horizontalArrangement = Arrangement.spacedBy(18.dp),

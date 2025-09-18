@@ -19,7 +19,6 @@ private val composableDestinations: Map<NavigationDestination, @Composable (
     AppNavigator,
     NavHostController,
 ) -> Unit> = mapOf(
-
     OnBoardingDestination to { appNavigator, navHostController ->
         val viewmodel: OnBoardingViewModel = koinViewModel()
         LaunchedEffect(Unit) {
@@ -35,9 +34,7 @@ private val composableDestinations: Map<NavigationDestination, @Composable (
     LoginDestination to { appNavigator, navHostController ->
         LoginScreen()
     },
-
 )
-
 
 fun NavGraphBuilder.addComposableDestinations(
     appNavigator: AppNavigator,
