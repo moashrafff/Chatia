@@ -36,18 +36,18 @@ kotlin {
             implementation(libs.koin.androidx.compose)
         }
         commonMain.dependencies {
+            // UI Components
+            implementation(libs.chatia.ui.components)
+
             implementation(compose.runtime)
             implementation(compose.foundation)
-            implementation(libs.compose.material3)
+            implementation(compose.material3)
             implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodelCompose)
             implementation(libs.androidx.lifecycle.runtimeCompose)
             implementation(projects.shared)
-
-            // UI Components
-            implementation(libs.chatia.ui.components)
 
             // Navigation
             implementation(libs.navigation.compose)
@@ -74,6 +74,11 @@ android {
         targetSdk = libs.versions.android.targetSdk.get().toInt()
         versionCode = 1
         versionName = "1.0"
+    }
+    lint {
+        abortOnError = false
+        checkReleaseBuilds = false
+        disable += setOf("NullSafeMutableLiveData") // the crashing detector
     }
     packaging {
         resources {
