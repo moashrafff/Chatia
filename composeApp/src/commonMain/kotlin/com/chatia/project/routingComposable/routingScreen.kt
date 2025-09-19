@@ -5,7 +5,6 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
@@ -14,9 +13,7 @@ import androidx.navigation.compose.rememberNavController
 import com.chatia.navigator.core.AppNavigator
 import com.chatia.navigator.event.NavigationEvent
 import com.chatia.navigator.screens.Screens
-import com.chatia.presentation.applyIf
 import com.chatia.project.graphDestination.addComposableDestinations
-import com.chatia.project.isAndroid
 import org.koin.compose.koinInject
 
 @Composable
@@ -53,11 +50,10 @@ fun AppScaffold(
             }
         }
     }
-
+    
     Column (
         modifier = Modifier
-            .fillMaxSize()
-            .applyIf(condition = isAndroid(), modifier = {statusBarsPadding()}),
+            .fillMaxSize(),
         content = {
             NavHost(
                 navController = navController,
@@ -73,7 +69,6 @@ fun AppScaffold(
         },
     )
 }
-
 
 
 
