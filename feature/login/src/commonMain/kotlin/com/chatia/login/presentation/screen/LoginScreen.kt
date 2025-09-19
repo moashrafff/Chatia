@@ -25,32 +25,21 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cahatia.feature.login.generated.resources.Res
 import cahatia.feature.login.generated.resources.apple_icon
-import cahatia.feature.login.generated.resources.create_an_account
-import cahatia.feature.login.generated.resources.dont_have_account
 import cahatia.feature.login.generated.resources.forget_password
 import cahatia.feature.login.generated.resources.google_icon
 import cahatia.feature.login.generated.resources.login_title
@@ -63,6 +52,9 @@ import cahatia.feature.login.generated.resources.password_placeholder
 import cahatia.feature.login.generated.resources.remember_me
 import cahatia.feature.login.generated.resources.sign_in
 import cahatia.feature.login.generated.resources.username_placeholder
+import com.chatia.login.presentation.component.CreateAccountAnnotatedText
+import com.chatia.login.presentation.protocol.LoginIntent
+import com.chatia.login.presentation.protocol.LoginState
 import com.chatia.presentation.applyIf
 import com.chatia.presentation.models.UiText
 import com.chatia.presentation.models.asString
@@ -78,13 +70,10 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Preview
 @Composable
-fun LoginScreen() {
-    var username by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
-    var passwordVisible by rememberSaveable { mutableStateOf(false) }
-    var checked by remember { mutableStateOf(false) }
-
-
+fun LoginScreen(
+    loginViewState: LoginState,
+    onIntentChange: (LoginIntent) -> Unit
+) {
     Column(
         modifier = Modifier
             .verticalGradientStops(
@@ -129,10 +118,8 @@ fun LoginScreen() {
                     errorIndicatorColor = Color.White
                 ),
                 placeholder = UiText.Resource(Res.string.username_placeholder).asString(),
-                value = username,
-                onValueChange = {
-                    username = it
-                }
+                value = loginViewState.loginUIModel?.userName.orEmpty(),
+                onValueChange = { onIntentChange.invoke(LoginIntent.UserNameUpdated(it)) }
             )
             Spacer(modifier = Modifier.height(4.dp))
             PrimaryInputField(
@@ -149,21 +136,21 @@ fun LoginScreen() {
                     errorIndicatorColor = Color.White
                 ),
                 placeholder = UiText.Resource(Res.string.password_placeholder).asString(),
-                value = password,
-                onValueChange = {
-                    password = it
-                },
+                value = loginViewState.loginUIModel?.password.orEmpty(),
+                onValueChange = { onIntentChange.invoke(LoginIntent.PasswordUpdated(it)) },
+                isError = loginViewState.showPasswordError(),
+                errorText = loginViewState.passwordError.getErrorMessage().asString(),
                 trailingIcon = {
                     Icon(
                         modifier = Modifier.padding(6.dp).size(16.dp)
-                            .clickable { passwordVisible = !passwordVisible },
+                            .clickable { onIntentChange.invoke(LoginIntent.PasswordVisibleClicked)},
                         tint = Color.Unspecified,
                         painter = painterResource(Res.drawable.password_icon),
                         contentDescription = UiText.Resource(Res.string.password_icon_content_description)
                             .asString()
                     )
                 },
-                visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
+                visualTransformation = if (loginViewState.isPasswordVisible) VisualTransformation.None else PasswordVisualTransformation(),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
             )
             Row(
@@ -176,12 +163,12 @@ fun LoginScreen() {
                             .size(18.dp)
                             .clip(CircleShape)
                             .background(
-                                if (checked) MaterialTheme.colorScheme.primary else Color.White.copy(
+                                if (loginViewState.isRememberMeChecked) MaterialTheme.colorScheme.primary else Color.White.copy(
                                     alpha = 0.35f
                                 ), RoundedCornerShape(0.5f)
                             )
                             .applyIf(
-                                condition = !checked,
+                                condition = !loginViewState.isRememberMeChecked,
                                 modifier = {
                                     border(
                                         2.dp,
@@ -189,10 +176,10 @@ fun LoginScreen() {
                                         CircleShape
                                     )
                                 })
-                            .clickable { checked = !checked },
+                            .clickable { onIntentChange.invoke(LoginIntent.RememberMeClicked) },
                         contentAlignment = Alignment.Center
                     ) {
-                        if (checked) {
+                        if (loginViewState.isRememberMeChecked) {
                             Icon(
                                 imageVector = Icons.Default.Check,
                                 contentDescription = null,
@@ -210,7 +197,7 @@ fun LoginScreen() {
                     )
                 }
                 PrimaryText(
-                    modifier = Modifier.clickable {},
+                    modifier = Modifier.clickable {onIntentChange.invoke(LoginIntent.ForgetPasswordClicked)},
                     text = UiText.Resource(Res.string.forget_password).asString(),
                     color = MaterialTheme.colorScheme.onSecondary,
                     fontSize = 12.sp,
@@ -221,7 +208,7 @@ fun LoginScreen() {
             PrimaryButton(
                 modifier = Modifier.height(52.dp).fillMaxWidth(),
                 text = UiText.Resource(Res.string.sign_in).asString(),
-                onClick = {},
+                onClick = {onIntentChange.invoke(LoginIntent.LoginClicked)},
                 textFontWeight = FontWeight.Normal,
                 textFontSize = 16.sp,
             )
@@ -254,7 +241,7 @@ fun LoginScreen() {
                     containerColor = Color.White,
                 ),
                 text = UiText.Resource(Res.string.login_with_google).asString(),
-                onClick = {},
+                onClick = {onIntentChange.invoke(LoginIntent.LoginWithGoogleClicked)},
                 textFontWeight = FontWeight.Normal,
                 textColor = MaterialTheme.colorScheme.onSurface ,
                 textFontSize = 16.sp,
@@ -274,7 +261,7 @@ fun LoginScreen() {
                     containerColor = Color.White,
                 ),
                 text = UiText.Resource(Res.string.login_with_apple).asString(),
-                onClick = {},
+                onClick = {onIntentChange.invoke(LoginIntent.LoginWithAppleClicked)},
                 textFontWeight = FontWeight.Normal,
                 textColor = MaterialTheme.colorScheme.onSurface ,
                 textFontSize = 16.sp,
@@ -288,31 +275,7 @@ fun LoginScreen() {
                 }
             )
             Spacer(modifier = Modifier.weight(1f))
-            val createAccountText = buildAnnotatedString {
-                withStyle(
-                    style = SpanStyle(
-                        color = MaterialTheme.colorScheme.onSecondary,
-                        fontSize = 14.sp,
-                        fontWeight = FontWeight.Normal
-                    )
-                ) {
-                    append(UiText.Resource(Res.string.dont_have_account).asString())
-                }
-
-                withStyle(
-                    style = SpanStyle(
-                        color = Color(0xFF0062FF),
-                        fontWeight = FontWeight.Normal,
-                        fontSize = 14.sp
-                    )
-                ) {
-                    append(UiText.Resource(Res.string.create_an_account).asString())
-                }
-            }
-            Text(
-                modifier = Modifier.clickable{},
-                text  = createAccountText
-            )
+            CreateAccountAnnotatedText(onCreateAccountClicked = {onIntentChange.invoke(LoginIntent.CreateAccountClicked)})
         }
     }
 }
