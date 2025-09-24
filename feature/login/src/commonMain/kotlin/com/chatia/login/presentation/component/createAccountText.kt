@@ -14,8 +14,8 @@ import androidx.compose.ui.unit.sp
 import cahatia.feature.login.generated.resources.Res
 import cahatia.feature.login.generated.resources.create_an_account
 import cahatia.feature.login.generated.resources.dont_have_account
-import com.chatia.presentation.models.UiText
-import com.chatia.presentation.models.asString
+import com.chatia.presentation.model.UiText
+import com.chatia.presentation.model.asString
 
 @Composable
 fun CreateAccountAnnotatedText(onCreateAccountClicked: () -> Unit) {

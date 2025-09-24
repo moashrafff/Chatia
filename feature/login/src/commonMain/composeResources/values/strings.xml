@@ -11,4 +11,7 @@
     <string name="login_with_apple">Login with Apple</string>
     <string name="dont_have_account">Don’t have an account? </string>
     <string name="create_an_account">Create an Account</string>
+    <string name="incorrect_password">Incorrect Password</string>
+    <string name="incorrect_password_length">Incorrect Password Length</string>
+    <string name="empty_text"> </string>
 </resources>

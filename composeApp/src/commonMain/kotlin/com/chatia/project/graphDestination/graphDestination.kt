@@ -3,6 +3,7 @@ package com.chatia.project.graphDestination
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
@@ -36,7 +37,7 @@ private val composableDestinations: Map<NavigationDestination, @Composable (
     },
     LoginDestination to { appNavigator, navHostController ->
         val viewmodel: LoginViewModel = koinViewModel()
-        val uiState = viewmodel.uiState.collectAsState()
+        val stateRenderer by viewmodel.stateRendererFlow.collectAsState()
         LaunchedEffect(Unit) {
             viewmodel.viewEffect.collect { output ->
                 when (output) {
@@ -48,7 +49,7 @@ private val composableDestinations: Map<NavigationDestination, @Composable (
             }
         }
         LoginScreen(
-            loginViewState = uiState.value,
+            stateRenderer = stateRenderer,
             onIntentChange = viewmodel::sendIntent
         )
     },

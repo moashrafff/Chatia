@@ -1,4 +1,4 @@
-package com.chatia.presentation.models
+package com.chatia.presentation.model
 
 data class ErrorMessage(
   val code: Int,

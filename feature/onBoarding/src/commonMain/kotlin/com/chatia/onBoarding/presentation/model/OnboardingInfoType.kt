@@ -10,7 +10,7 @@ import cahatia.feature.onboarding.generated.resources.link_circle
 import cahatia.feature.onboarding.generated.resources.personalized_advice_description
 import cahatia.feature.onboarding.generated.resources.personalized_advice_title
 import cahatia.feature.onboarding.generated.resources.quote_up_circle
-import com.chatia.presentation.models.UiText
+import com.chatia.presentation.model.UiText
 import org.jetbrains.compose.resources.DrawableResource
 
 enum class OnboardingInfoType(val title: UiText, val icon: DrawableResource, val description: UiText) {
