@@ -33,8 +33,8 @@ import com.chatia.onBoarding.presentation.component.OnBoardingInfoCard
 import com.chatia.onBoarding.presentation.model.OnboardingInfoType
 import com.chatia.onBoarding.presentation.protocol.OnBoardingIntent
 import com.chatia.presentation.applyIf
-import com.chatia.presentation.models.UiText
-import com.chatia.presentation.models.asString
+import com.chatia.presentation.model.UiText
+import com.chatia.presentation.model.asString
 import com.chatia.project.isAndroid
 import com.chatia.ui.components.buttons.PrimaryButton
 import com.chatia.ui.components.texts.PrimaryText

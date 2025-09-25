@@ -2,7 +2,8 @@ package com.chatia.login.presentation.protocol
 
 import com.chatia.login.presentation.error.LoginUIError
 import com.chatia.login.presentation.model.LoginUIModel
-import com.chatia.presentation.models.ErrorMessage
+import com.chatia.presentation.model.ErrorMessage
+import com.mmk.kmpauth.google.GoogleUser
 
 sealed interface LoginIntent {
     data class UserNameUpdated(val userName: String) : LoginIntent
@@ -10,8 +11,8 @@ sealed interface LoginIntent {
     data object RememberMeClicked : LoginIntent
     data object PasswordVisibleClicked : LoginIntent
     data object ForgetPasswordClicked : LoginIntent
-    data object LoginClicked : LoginIntent
-    data object LoginWithGoogleClicked : LoginIntent
+    data object OnLoginClicked : LoginIntent
+    data class LoginWithGoogleClickedResult(val googleUser: GoogleUser?) : LoginIntent
     data object LoginWithAppleClicked : LoginIntent
     data object CreateAccountClicked : LoginIntent
 }
@@ -24,7 +25,7 @@ sealed interface LoginEffect {
 }
 
 data class LoginState(
-    val loginUIModel: LoginUIModel? = null,
+    val loginUIModel: LoginUIModel = LoginUIModel(userName = "", password = ""),
     val isLoginButtonEnabled: Boolean = false,
     val isPasswordVisible: Boolean = false,
     val isRememberMeChecked: Boolean = false,

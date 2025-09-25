@@ -25,5 +25,5 @@ object LoginValidator {
         password.count() in PASSWORD_MIN_LENGTH..PASSWORD_MAX_LENGTH
 
     fun isLoginValid(passwordError: LoginUIError): Boolean =
-        (passwordError == LoginUIError.NoError) && (passwordError != LoginUIError.NoEntry)
+        (passwordError == LoginUIError.NoError) || (passwordError != LoginUIError.NoEntry)
 }

@@ -1,4 +1,4 @@
-package com.chatia.presentation.models
+package com.chatia.presentation.model
 
 import androidx.compose.runtime.Composable
 import org.jetbrains.compose.resources.StringResource
@@ -30,6 +30,7 @@ sealed class UiText {
 
     companion object {
         fun empty() = Dynamic("")
+        fun ok() = Dynamic("ok")
     }
 }
 

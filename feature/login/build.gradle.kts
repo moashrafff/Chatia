@@ -21,6 +21,10 @@ kotlin {
         }
     }
 
+    iosArm64()
+    iosX64()
+    iosSimulatorArm64()
+
     listOf(
         iosX64(),
         iosArm64(),
@@ -65,6 +69,10 @@ kotlin {
 //            api(libs.koin.core)
             implementation(libs.koin.compose)
             implementation(libs.koin.compose.viewmodel)
+
+            implementation("io.github.mirzemehdi:kmpauth-google:2.3.1") //Google One Tap Sign-In
+            implementation("io.github.mirzemehdi:kmpauth-firebase:2.3.1") //Integrated Authentications with Firebase
+            implementation("co.touchlab:kermit:2.0.8")
 
             implementation(project(":core:presentation"))
             implementation(project(":core:domain"))
