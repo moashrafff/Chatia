@@ -2,6 +2,7 @@ package com.chatia.login.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import co.touchlab.kermit.Logger
 import com.chatia.login.presentation.error.LoginUIError
 import com.chatia.login.presentation.model.LoginUIModel
 import com.chatia.login.presentation.protocol.LoginEffect
@@ -10,6 +11,7 @@ import com.chatia.login.presentation.protocol.LoginIntent
 import com.chatia.login.presentation.protocol.LoginState
 import com.chatia.login.presentation.validation.LoginValidator
 import com.chatia.presentation.stateRenderer.StateRenderer
+import com.mmk.kmpauth.google.GoogleUser
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -33,13 +35,12 @@ class LoginViewModel : ViewModel() {
         when (intent) {
             is LoginIntent.CreateAccountClicked -> sendEffect { NavigateToRegister }
             is LoginIntent.ForgetPasswordClicked -> sendEffect { NavigateToForgetPassword(loginState.loginUIModel.userName) }
-            is LoginIntent.LoginClicked -> loginWithUserNameAndPassword(
+            is LoginIntent.OnLoginClicked -> loginWithUserNameAndPassword(
                 username = loginState.loginUIModel.userName,
                 password = loginState.loginUIModel.password
             )
-
             is LoginIntent.LoginWithAppleClicked -> loginWithApple()
-            is LoginIntent.LoginWithGoogleClicked -> loginWithGoogle()
+            is LoginIntent.LoginWithGoogleClickedResult -> loginWithGoogle(googleUser = intent.googleUser)
             is LoginIntent.UserNameUpdated -> updateState {
                 copy(
                     loginUIModel = loginState.loginUIModel.copy(
@@ -47,7 +48,6 @@ class LoginViewModel : ViewModel() {
                     )
                 )
             }
-
             is LoginIntent.PasswordUpdated -> updateState {
                 copy(
                     loginUIModel = loginState.loginUIModel.copy(
@@ -55,14 +55,13 @@ class LoginViewModel : ViewModel() {
                     )
                 )
             }
-
             is LoginIntent.RememberMeClicked -> toggleRememberMe()
             is LoginIntent.PasswordVisibleClicked -> togglePasswordVisibility()
         }
     }
 
-    private fun loginWithGoogle() {
-
+    private fun loginWithGoogle(googleUser: GoogleUser?) {
+        Logger.d { "loginWithGoogle$googleUser" }
     }
 
     private fun loginWithApple() {

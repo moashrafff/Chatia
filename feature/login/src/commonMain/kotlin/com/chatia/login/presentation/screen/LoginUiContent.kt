@@ -39,11 +39,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cahatia.feature.login.generated.resources.Res
-import cahatia.feature.login.generated.resources.apple_icon
 import cahatia.feature.login.generated.resources.forget_password
 import cahatia.feature.login.generated.resources.google_icon
 import cahatia.feature.login.generated.resources.login_title
-import cahatia.feature.login.generated.resources.login_with_apple
 import cahatia.feature.login.generated.resources.login_with_google
 import cahatia.feature.login.generated.resources.or_login_with
 import cahatia.feature.login.generated.resources.password_icon
@@ -65,6 +63,7 @@ import com.chatia.ui.components.buttons.PrimaryButton
 import com.chatia.ui.components.inputFields.PrimaryInputField
 import com.chatia.ui.components.texts.PrimaryText
 import com.chatia.ui.components.verticalGradientStops
+import com.mmk.kmpauth.google.GoogleButtonUiContainer
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
@@ -142,7 +141,7 @@ fun LoginUiContent(
                 trailingIcon = {
                     Icon(
                         modifier = Modifier.padding(6.dp).size(16.dp)
-                            .clickable { onIntentChange.invoke(LoginIntent.PasswordVisibleClicked)},
+                            .clickable { onIntentChange.invoke(LoginIntent.PasswordVisibleClicked) },
                         tint = Color.Unspecified,
                         painter = painterResource(Res.drawable.password_icon),
                         contentDescription = UiText.Resource(Res.string.password_icon_content_description)
@@ -197,7 +196,7 @@ fun LoginUiContent(
                     )
                 }
                 PrimaryText(
-                    modifier = Modifier.clickable {onIntentChange.invoke(LoginIntent.ForgetPasswordClicked)},
+                    modifier = Modifier.clickable { onIntentChange.invoke(LoginIntent.ForgetPasswordClicked) },
                     text = UiText.Resource(Res.string.forget_password).asString(),
                     color = MaterialTheme.colorScheme.onSecondary,
                     fontSize = 12.sp,
@@ -208,7 +207,9 @@ fun LoginUiContent(
             PrimaryButton(
                 modifier = Modifier.height(52.dp).fillMaxWidth(),
                 text = UiText.Resource(Res.string.sign_in).asString(),
-                onClick = {onIntentChange.invoke(LoginIntent.LoginClicked)},
+                onClick = {
+                    onIntentChange.invoke(LoginIntent.OnLoginClicked)
+                },
                 textFontWeight = FontWeight.Normal,
                 textFontSize = 16.sp,
             )
@@ -235,47 +236,32 @@ fun LoginUiContent(
                 )
             }
             Spacer(modifier = Modifier.height(28.dp))
-            PrimaryButton(
-                modifier = Modifier.height(52.dp).fillMaxWidth(),
-                buttonColors = ButtonDefaults.buttonColors(
-                    containerColor = Color.White,
-                ),
-                text = UiText.Resource(Res.string.login_with_google).asString(),
-                onClick = {onIntentChange.invoke(LoginIntent.LoginWithGoogleClicked)},
-                textFontWeight = FontWeight.Normal,
-                textColor = MaterialTheme.colorScheme.onSurface ,
-                textFontSize = 16.sp,
-                icon = {
-                    Icon(
-                        modifier = Modifier.size(20.dp),
-                        painter = painterResource(Res.drawable.google_icon),
-                        contentDescription = UiText.Resource(Res.string.login_with_google).asString(),
-                        tint = Color.Unspecified
-                    )
-                }
-            )
-            Spacer(modifier = Modifier.height(12.dp))
-            PrimaryButton(
-                modifier = Modifier.height(52.dp).fillMaxWidth(),
-                buttonColors = ButtonDefaults.buttonColors(
-                    containerColor = Color.White,
-                ),
-                text = UiText.Resource(Res.string.login_with_apple).asString(),
-                onClick = {onIntentChange.invoke(LoginIntent.LoginWithAppleClicked)},
-                textFontWeight = FontWeight.Normal,
-                textColor = MaterialTheme.colorScheme.onSurface ,
-                textFontSize = 16.sp,
-                icon = {
-                    Icon(
-                        modifier = Modifier.size(20.dp),
-                        painter = painterResource(Res.drawable.apple_icon),
-                        contentDescription = UiText.Resource(Res.string.login_with_apple).asString(),
-                        tint = Color.Unspecified
-                    )
-                }
-            )
+            GoogleButtonUiContainer(onGoogleSignInResult = { googleUser ->
+                onIntentChange.invoke(LoginIntent.LoginWithGoogleClickedResult(googleUser = googleUser))
+            }) {
+                PrimaryButton(
+                    modifier = Modifier.height(52.dp).fillMaxWidth(),
+                    buttonColors = ButtonDefaults.buttonColors(
+                        containerColor = Color.White,
+                    ),
+                    text = UiText.Resource(Res.string.login_with_google).asString(),
+                    onClick = { this.onClick() },
+                    textFontWeight = FontWeight.Normal,
+                    textColor = MaterialTheme.colorScheme.onSurface,
+                    textFontSize = 16.sp,
+                    icon = {
+                        Icon(
+                            modifier = Modifier.size(20.dp),
+                            painter = painterResource(Res.drawable.google_icon),
+                            contentDescription = UiText.Resource(Res.string.login_with_google)
+                                .asString(),
+                            tint = Color.Unspecified
+                        )
+                    }
+                )
+            }
             Spacer(modifier = Modifier.weight(1f))
-            CreateAccountAnnotatedText(onCreateAccountClicked = {onIntentChange.invoke(LoginIntent.CreateAccountClicked)})
+            CreateAccountAnnotatedText(onCreateAccountClicked = { onIntentChange.invoke(LoginIntent.CreateAccountClicked) })
         }
     }
 }

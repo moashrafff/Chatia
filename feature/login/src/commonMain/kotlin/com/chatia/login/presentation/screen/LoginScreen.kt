@@ -9,11 +9,11 @@ import com.chatia.presentation.stateRenderer.StateRenderer
 @Composable
 fun LoginScreen(
     stateRenderer: StateRenderer<LoginState, LoginUIModel>,
-    onIntentChange: (LoginIntent) -> Unit,
+    onIntentChange: (LoginIntent) -> Unit
 ) {
     StateRenderer.of(
         statRenderer = stateRenderer,
-        retryAction = { onIntentChange.invoke(LoginIntent.LoginClicked) },
+        retryAction = { onIntentChange.invoke(LoginIntent.OnLoginClicked) },
     ) {
         onUiState { updatedState ->
             LoginUiContent(updatedState, onIntentChange)
