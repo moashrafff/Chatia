@@ -7,13 +7,9 @@ plugins {
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
 
-    alias(libs.plugins.composeHotReload)
-    alias(libs.plugins.kotlinxSerialization)
 }
 
 kotlin {
-    androidTarget()
-
     androidTarget {
         @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
@@ -27,7 +23,7 @@ kotlin {
         iosSimulatorArm64()
     ).forEach { iosTarget ->
         iosTarget.binaries.framework {
-            baseName = "login"
+            baseName = "data"
             isStatic = true
         }
     }
@@ -49,35 +45,29 @@ kotlin {
         commonMain.dependencies {
             implementation(compose.runtime)
             implementation(compose.foundation)
-            implementation(compose.ui)
             implementation(compose.material3)
+            implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
-            implementation(compose.materialIconsExtended)
             implementation(libs.androidx.lifecycle.viewmodelCompose)
             implementation(libs.androidx.lifecycle.runtimeCompose)
             implementation(projects.shared)
 
-            // UI Components
-            implementation(libs.chatia.ui.components)
+
+            implementation(project(":core:domain"))
 
             // Koin
-//            api(libs.koin.core)
-            implementation(libs.koin.compose)
-            implementation(libs.koin.compose.viewmodel)
+            api(libs.koin.core)
 
-            implementation(project(":core:presentation"))
-            implementation(project(":core:domain"))
-            implementation(project(":core:data"))
-            implementation(project(":core:utils"))
 
             //ktor
+            implementation ("com.google.code.gson:gson:2.13.2")
+
             implementation(libs.ktor.client.core)
             implementation(libs.ktor.client.content.negotiation)
             implementation(libs.ktor.serialization.kotlinx.json)
             api(libs.koin.core)
-            implementation(libs.koin.compose)
-            implementation(libs.koin.composeVM)
+
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -86,7 +76,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.chatia.login"
+    namespace = "com.chatia.data"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {
