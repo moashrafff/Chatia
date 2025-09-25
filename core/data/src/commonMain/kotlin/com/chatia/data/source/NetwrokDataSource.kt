@@ -1,12 +1,14 @@
 package com.chatia.data.source
 
 import com.chatia.data.response.ErrorResponse
+import com.chatia.domain.result.Result
 import io.ktor.client.network.sockets.SocketTimeoutException
 import io.ktor.client.statement.HttpResponse
 import io.ktor.http.Headers
 import kotlinx.coroutines.GlobalScope.coroutineContext
 import kotlinx.coroutines.isActive
 import com.chatia.domain.model.ErrorMessage
+import io.ktor.client.call.body
 
 class NetworkDataSource<SERVICE>(
     private val service: SERVICE,
@@ -14,7 +16,7 @@ class NetworkDataSource<SERVICE>(
 ) {
     suspend fun <R, T> performRequest(
         request: suspend SERVICE.() -> HttpResponse<R>,
-        onSuccess: suspend (R, Headers) -> Result<T> = { _, _ -> Result.empty() },
+        onSuccess: suspend (R, Headers) -> Result<T> = { _, _ -> Result.empty<>() },
         onEmpty: suspend () -> Result<T> = { Result.empty() },
         onError: suspend (ErrorResponse, Int) -> Result<T> = { errorResponse, code ->
             Result.error(
