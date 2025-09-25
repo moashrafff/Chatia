@@ -61,7 +61,7 @@ class LoginViewModel : ViewModel() {
     }
 
     private fun loginWithGoogle(googleUser: GoogleUser?) {
-        Logger.d { "loginWithGoogle$googleUser" }
+
     }
 
     private fun loginWithApple() {

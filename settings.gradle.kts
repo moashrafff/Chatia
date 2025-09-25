@@ -35,7 +35,9 @@ dependencyResolutionManagement {
 
 include(":core:presentation")
 include(":core:domain")
+include(":core:data")
 include(":core:navigator")
+include(":data")
 include(":core:utils")
 include(":feature:onBoarding")
 include(":feature:login")
