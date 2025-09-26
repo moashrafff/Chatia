@@ -9,4 +9,11 @@
     <string name="login"> Login</string>
     <string name="password_icon_content_description">Password Icon</string>
     <string name="empty_text"> </string>
+
+    <string name="register_invalid_email">Please enter a valid email address</string>
+    <string name="register_invalid_phone">Please enter a valid phone number</string>
+    <string name="register_invalid_password">Password must contain upper, lower, digit, and special character</string>
+    <string name="register_invalid_password_length">Password must be between 6 and 10 characters</string>
+    <string name="register_passwords_do_not_match">Passwords do not match</string>
+    <string name="register_terms_not_accepted">You must accept the terms and conditions</string>
 </resources>
