@@ -1,0 +1,12 @@
+<resources>
+    <string name="register_title">Create new account</string>
+    <string name="username_placeholder">Username</string>
+    <string name="password_placeholder">Password</string>
+    <string name="email_placeholder">Email</string>
+    <string name="phone_number_placeholder">Phone Number</string>
+    <string name="register">Register</string>
+    <string name="have_an_account">Already have an account?</string>
+    <string name="login"> Login</string>
+    <string name="password_icon_content_description">Password Icon</string>
+    <string name="empty_text"> </string>
+</resources>

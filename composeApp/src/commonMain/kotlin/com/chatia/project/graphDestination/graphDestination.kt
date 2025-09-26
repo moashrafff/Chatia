@@ -14,22 +14,24 @@ import com.chatia.navigator.core.AppNavigator
 import com.chatia.navigator.destination.navigationDestination.NavigationDestination
 import com.chatia.navigator.destination.screensDestination.LoginDestination
 import com.chatia.navigator.destination.screensDestination.OnBoardingDestination
+import com.chatia.navigator.destination.screensDestination.RegisterDestination
 import com.chatia.onBoarding.presentation.protocol.OnBoardingEffect
 import com.chatia.onBoarding.presentation.screen.OnBoardingScreen
 import com.chatia.onBoarding.presentation.viewmodel.OnBoardingViewModel
+import com.chatia.register.presentation.screen.RegisterScreen
 import org.koin.compose.viewmodel.koinViewModel
 
 private val composableDestinations: Map<NavigationDestination, @Composable (
     AppNavigator,
     NavHostController,
 ) -> Unit> = mapOf(
-    OnBoardingDestination to { appNavigator, navHostController ->
+    OnBoardingDestination to { appNavigator, _ ->
         val viewmodel: OnBoardingViewModel = koinViewModel()
         LaunchedEffect(Unit) {
             viewmodel.viewEffect.collect { output ->
                 when (output) {
                     OnBoardingEffect.NavigateToLogin -> appNavigator.navigate(LoginDestination.route())
-                    OnBoardingEffect.NavigateToRegister -> Unit
+                    OnBoardingEffect.NavigateToRegister -> appNavigator.navigate(RegisterDestination.route())
                 }
             }
         }
@@ -43,7 +45,7 @@ private val composableDestinations: Map<NavigationDestination, @Composable (
                 when (output) {
                     is LoginEffect.NavigateToForgetPassword -> Unit
                     is LoginEffect.NavigateToHome -> Unit
-                    is LoginEffect.NavigateToRegister -> Unit
+                    is LoginEffect.NavigateToRegister -> appNavigator.navigate(RegisterDestination.route())
                     is LoginEffect.ShowError -> Unit
                 }
             }
@@ -53,6 +55,9 @@ private val composableDestinations: Map<NavigationDestination, @Composable (
             onIntentChange = viewmodel::sendIntent
         )
     },
+    RegisterDestination to { appNavigator, navHostController ->
+        RegisterScreen()
+    }
 )
 
 fun NavGraphBuilder.addComposableDestinations(
