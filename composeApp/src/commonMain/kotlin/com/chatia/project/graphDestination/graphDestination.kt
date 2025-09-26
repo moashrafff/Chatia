@@ -6,12 +6,14 @@ import androidx.compose.runtime.collectAsState
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
+import com.chatia.login.presentation.EnablePermissionsScreen
 import com.chatia.login.presentation.protocol.LoginEffect
 import com.chatia.login.presentation.screen.LoginScreen
 import com.chatia.login.presentation.viewmodel.LoginViewModel
 import com.chatia.navigator.core.AppNavigator
 import com.chatia.navigator.destination.navigationDestination.NavigationDestination
 import com.chatia.navigator.destination.screensDestination.LoginDestination
+import com.chatia.navigator.destination.screensDestination.OTPDestination
 import com.chatia.navigator.destination.screensDestination.OnBoardingDestination
 import com.chatia.onBoarding.presentation.protocol.OnBoardingEffect
 import com.chatia.onBoarding.presentation.screen.OnBoardingScreen
@@ -28,7 +30,7 @@ private val composableDestinations: Map<NavigationDestination, @Composable (
             viewmodel.viewEffect.collect { output ->
                 when (output) {
                     OnBoardingEffect.NavigateToLogin -> appNavigator.navigate(LoginDestination.route())
-                    OnBoardingEffect.NavigateToRegister -> Unit
+                    OnBoardingEffect.NavigateToRegister -> appNavigator.navigate(OTPDestination.route())
                 }
             }
         }
@@ -52,6 +54,9 @@ private val composableDestinations: Map<NavigationDestination, @Composable (
             onIntentChange = viewmodel::sendIntent
         )
     },
+    OTPDestination to { appNavigator, navHostController ->
+        EnablePermissionsScreen()
+    }
 )
 
 fun NavGraphBuilder.addComposableDestinations(

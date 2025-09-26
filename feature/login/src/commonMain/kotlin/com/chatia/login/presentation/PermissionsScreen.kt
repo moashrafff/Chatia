@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
@@ -36,9 +37,10 @@ fun EnablePermissionsScreen() {
         modifier = Modifier.verticalGradientStops(
             0.12f to Color(0xFFFFFFFF), 0.24f to Color(0xFFFFE5F9), 0.66f to Color(0xFFFFF7EB)
         ).applyIf(condition = isAndroid(),modifier = { Modifier.padding(8.dp) })
-            .fillMaxSize()
+            .fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Spacer(modifier = Modifier.height(32.dp))
+        Spacer(modifier = Modifier.height(52.dp))
         Image(
             modifier = Modifier.size(136.dp),
             painter = painterResource(com.chatia.presentation.resources.Res.drawable.chatia_logo),
@@ -53,11 +55,13 @@ fun EnablePermissionsScreen() {
             textAlign = TextAlign.Center,
             lineHeight = 32.sp
         )
-
+        Spacer(modifier = Modifier.height(12.dp))
         PrimaryText(
             text = UiText.Resource(cahatia.feature.login.generated.resources.Res.string.enable_permissions_description).asString(),
-            fontWeight = FontWeight.Normal
+            fontWeight = FontWeight.Normal,
+            textAlign = TextAlign.Center
         )
+        Spacer(modifier = Modifier.height(12.dp))
 
         Column(
             modifier = Modifier.fillMaxWidth().weight(1f).padding(horizontal = 16.dp)
@@ -71,12 +75,13 @@ fun EnablePermissionsScreen() {
         }
 
         PrimaryButton(
-            modifier = Modifier.height(52.dp).fillMaxWidth(),
+            modifier = Modifier.height(52.dp).fillMaxWidth().padding(horizontal = 18.dp),
             text = UiText.Resource(cahatia.feature.login.generated.resources.Res.string.enable_permissions).asString(),
             onClick = { /*TODO*/ },
             textFontWeight = FontWeight.Normal,
             textFontSize = 16.sp
         )
+        Spacer(modifier = Modifier.weight(0.1f))
 
     }
 }
