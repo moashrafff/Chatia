@@ -36,6 +36,24 @@
 
     <string name="adaptive_learning">Adaptive Learning</string>
 
+    <string name="confirm_email">Confirm your email</string>
+    <string name="confirm_email_description">Please enter the 4-digit code we sent to your email to continue</string>
+
+    <string name="continue_text">Continue</string>
+    <string name="resend_in">Resend in 10s</string>
+
+
+    <string name="chatia_subscriptions">Get Chatia Plus Subscriptions</string>
+    <string name="chatia_subscriptions_description">Allow access to enhance your experience nd unlock all features</string>
+    <string name="basic_plan">Basic Plan</string>
+    <string name="basic_plan_description">Perfect for personal use with basic features and 100 monthly messages</string>
+
+    <string name="pro_plan">Pro Plan</string>
+    <string name="pro_plan_description">Designed for small businesses with team features , analytics and 500 messages per month </string>
+
+    <string name="enterprise_plan">Enterprise Plan</string>
+    <string name="enterprise_plan_description">Built for team and organizations including team collaboration tools , analytica ,priority support , and 1000 monthly messages</string>
+
 
 
 
