@@ -10,4 +10,5 @@
     <string name="or_login_with">or Login with</string>
     <string name="login_with_google">Login with Google</string>
     <string name="login_with_apple">Login with Apple</string>
+    <string name="enable_permissions">Enable Permission</string>
 </resources>

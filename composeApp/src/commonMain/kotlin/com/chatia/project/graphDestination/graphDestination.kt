@@ -2,14 +2,21 @@ package com.chatia.project.graphDestination
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.remember
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
+import com.chatia.login.presentation.ChatiaPlusSubscriptionScreen
+import com.chatia.login.presentation.protocol.LoginEffect
 import com.chatia.login.presentation.screen.LoginScreen
+import com.chatia.login.presentation.viewmodel.LoginViewModel
 import com.chatia.navigator.core.AppNavigator
 import com.chatia.navigator.destination.navigationDestination.NavigationDestination
 import com.chatia.navigator.destination.screensDestination.LoginDestination
 import com.chatia.navigator.destination.screensDestination.OnBoardingDestination
+import com.chatia.navigator.destination.screensDestination.PermissionsScreenDestination
 import com.chatia.onBoarding.presentation.protocol.OnBoardingEffect
 import com.chatia.onBoarding.presentation.screen.OnBoardingScreen
 import com.chatia.onBoarding.presentation.viewmodel.OnBoardingViewModel
@@ -25,15 +32,36 @@ private val composableDestinations: Map<NavigationDestination, @Composable (
             viewmodel.viewEffect.collect { output ->
                 when (output) {
                     OnBoardingEffect.NavigateToLogin -> appNavigator.navigate(LoginDestination.route())
-                    OnBoardingEffect.NavigateToRegister -> Unit
+                    OnBoardingEffect.NavigateToRegister -> appNavigator.navigate(PermissionsScreenDestination.route())
                 }
             }
         }
         OnBoardingScreen(viewmodel::setIntent)
     },
     LoginDestination to { appNavigator, navHostController ->
-        LoginScreen()
+        val viewmodel: LoginViewModel = koinViewModel()
+        val uiState = viewmodel.uiState.collectAsState()
+        LaunchedEffect(Unit) {
+            viewmodel.viewEffect.collect { output ->
+                when (output) {
+                    is LoginEffect.NavigateToForgetPassword -> Unit
+                    is LoginEffect.NavigateToHome -> Unit
+                    is LoginEffect.NavigateToRegister -> Unit
+                    is LoginEffect.ShowError -> Unit
+                }
+            }
+        }
+        LoginScreen(
+            loginViewState = uiState.value,
+            onIntentChange = viewmodel::sendIntent
+        )
     },
+    PermissionsScreenDestination to { appNavigator, navHostController ->
+//        EnablePermissionsScreen()
+        val remeberListState = remember { mutableStateListOf("","","","")  }
+//        OTPScreen(remeberListState)
+        ChatiaPlusSubscriptionScreen()
+    }
 )
 
 fun NavGraphBuilder.addComposableDestinations(
