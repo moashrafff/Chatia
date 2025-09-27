@@ -4,9 +4,9 @@ import com.chatia.navigator.destination.navigationDestination.NavigationDestinat
 import com.chatia.navigator.screens.Screens
 
 
-const val OTP_ROUTE = "OTPRoute"
+const val PERMISSIONS_SCREEN_ROUTE = "PermissionsRoute"
 
-object OTPDestination : NavigationDestination {
-    override fun route(): String = Screens.OTPScreenRoute.route
+object PermissionsScreenDestination : NavigationDestination {
+    override fun route(): String = Screens.PermissionsScreenRoute.route
 
 }

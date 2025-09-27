@@ -23,4 +23,27 @@
     <string name="location_access_description">Allow location access or personalized recommendations and local support based on your area </string>
     <string name="gallery_access_description">Provide gallery access to easily upload , share , and organize images or documents within the app</string>
 
+
+    <string name="chatia_plus_unlock">Chatia Plus Unlock</string>
+    <string name="chatia_plus_unlock_description">Exclusive perks await with premium chatia plus subscriptions today</string>
+
+    <string name="upgrade_to_plus">Upgrade to Plus</string>
+
+    <string name="seamless_ai_assistance">Seamless AI Assistance</string>
+    <string name="unlimited_access">Unlimited Access</string>
+
+    <string name="availability">24/7 Availability</string>
+
+    <string name="adaptive_learning">Adaptive Learning</string>
+
+
+
+
+    <string name="seamless_ai_assistance_description">Get instant, smart, and personalized responses anytime you need them</string>
+    <string name="unlimited_access_description">Enjoy unlimited chat and assistance without restrictions on usage</string>
+
+    <string name="availability_description">Connect with chatia at any time of day , ensuring you are never without support </string>
+
+    <string name="adaptive_learning_description">Chatia improves over time getting smarter with every interaction to better meet you need </string>
+
 </resources>
