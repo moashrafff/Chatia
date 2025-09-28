@@ -7,7 +7,6 @@ import cahatia.feature.register.generated.resources.register_invalid_password
 import cahatia.feature.register.generated.resources.register_invalid_password_length
 import cahatia.feature.register.generated.resources.register_invalid_phone
 import cahatia.feature.register.generated.resources.register_passwords_do_not_match
-import cahatia.feature.register.generated.resources.register_terms_not_accepted
 import org.jetbrains.compose.resources.StringResource
 
 sealed class RegisterUIError : Error() {
@@ -39,9 +38,5 @@ sealed class RegisterUIError : Error() {
 
     data object PasswordsDoNotMatch : RegisterUIError() {
         override fun getErrorMessage(): StringResource = Res.string.register_passwords_do_not_match
-    }
-
-    data object TermsNotAccepted : RegisterUIError() {
-        override fun getErrorMessage(): StringResource = Res.string.register_terms_not_accepted
     }
 }

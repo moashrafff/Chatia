@@ -50,16 +50,22 @@ import com.chatia.presentation.model.asString
 import com.chatia.presentation.resources.chatia_logo
 import com.chatia.presentation.resources.chatia_logo_content_description
 import com.chatia.project.isAndroid
+import com.chatia.register.presentation.protocol.RegisterIntent
+import com.chatia.register.presentation.protocol.RegisterUiState
 import com.chatia.ui.components.buttons.PrimaryButton
 import com.chatia.ui.components.inputFields.PrimaryInputField
 import com.chatia.ui.components.texts.PrimaryText
 import com.chatia.ui.components.verticalGradientStops
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Preview
 @Composable
-fun RegisterUiContent() {
+fun RegisterUiContent(
+    uiState: RegisterUiState = RegisterUiState(),
+    sendIntent: (RegisterIntent) -> Unit
+) {
     Column(
         modifier = Modifier
             .verticalGradientStops(
@@ -105,8 +111,8 @@ fun RegisterUiContent() {
                     errorIndicatorColor = Color.White
                 ),
                 placeholder = UiText.Resource(Res.string.username_placeholder).asString(),
-                value = "",
-                onValueChange = {}
+                value = uiState.registerUIModel.userName,
+                onValueChange = {sendIntent.invoke(RegisterIntent.UserNameUpdated(it))}
             )
             Spacer(modifier = Modifier.height(16.dp))
             PrimaryInputField(
@@ -123,8 +129,10 @@ fun RegisterUiContent() {
                     errorIndicatorColor = Color.White
                 ),
                 placeholder = UiText.Resource(Res.string.email_placeholder).asString(),
-                value = "",
-                onValueChange = {}
+                value = uiState.registerUIModel.email,
+                onValueChange = {sendIntent.invoke(RegisterIntent.EmailUpdated(it))},
+                isError = uiState.showEmailError(),
+                errorText = stringResource(uiState.emailError.getErrorMessage())
             )
             Spacer(modifier = Modifier.height(16.dp))
             PrimaryInputField(
@@ -142,7 +150,11 @@ fun RegisterUiContent() {
                 ),
                 placeholder = UiText.Resource(Res.string.phone_number_placeholder).asString(),
                 leadingIcon = {
-                    Row(modifier = Modifier.padding(start = 12.dp, end = 8.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+                    Row(
+                        modifier = Modifier.padding(start = 12.dp, end = 8.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(4.dp)
+                    ) {
                         Icon(
                             modifier = Modifier.size(16.dp).clip(CircleShape),
                             painter = painterResource(Res.drawable.us_flag),
@@ -163,8 +175,10 @@ fun RegisterUiContent() {
                         )
                     }
                 },
-                value = "",
-                onValueChange = {}
+                value = uiState.registerUIModel.phone,
+                onValueChange = {sendIntent.invoke(RegisterIntent.PhoneUpdated(it))},
+                isError = uiState.showPhoneError(),
+                errorText = stringResource(uiState.phoneError.getErrorMessage())
             )
             Spacer(modifier = Modifier.height(16.dp))
             PrimaryInputField(
@@ -181,17 +195,18 @@ fun RegisterUiContent() {
                     errorIndicatorColor = Color.White
                 ),
                 placeholder = UiText.Resource(Res.string.password_placeholder).asString(),
-                value = "",
-                onValueChange = {},
-                isError = false,
-                errorText = null,
+                value = uiState.registerUIModel.password,
+                onValueChange = {sendIntent.invoke(RegisterIntent.PasswordUpdated(it))},
+                isError = uiState.showPasswordError(),
+                errorText = stringResource(uiState.passwordError.getErrorMessage()),
                 trailingIcon = {
                     Icon(
                         modifier = Modifier.padding(6.dp).size(16.dp)
-                            .clickable {  },
+                            .clickable { },
                         tint = Color.Unspecified,
                         painter = painterResource(Res.drawable.password_icon),
-                        contentDescription = UiText.Resource(Res.string.password_icon_content_description).asString()
+                        contentDescription = UiText.Resource(Res.string.password_icon_content_description)
+                            .asString()
                     )
                 },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
@@ -211,17 +226,18 @@ fun RegisterUiContent() {
                     errorIndicatorColor = Color.White
                 ),
                 placeholder = UiText.Resource(Res.string.password_placeholder).asString(),
-                value = "",
-                onValueChange = {},
-                isError = false,
-                errorText = null,
+                value = uiState.registerUIModel.confirmPassword,
+                onValueChange = {sendIntent.invoke(RegisterIntent.ConfirmPasswordUpdated(it))},
+                isError = uiState.showConfirmPasswordError(),
+                errorText = stringResource(uiState.confirmPasswordError.getErrorMessage()),
                 trailingIcon = {
                     Icon(
                         modifier = Modifier.padding(6.dp).size(16.dp)
-                            .clickable {  },
+                            .clickable { },
                         tint = Color.Unspecified,
                         painter = painterResource(Res.drawable.password_icon),
-                        contentDescription = UiText.Resource(Res.string.password_icon_content_description).asString()
+                        contentDescription = UiText.Resource(Res.string.password_icon_content_description)
+                            .asString()
                     )
                 },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
@@ -230,7 +246,7 @@ fun RegisterUiContent() {
             PrimaryButton(
                 modifier = Modifier.height(52.dp).fillMaxWidth(),
                 text = UiText.Resource(Res.string.register).asString(),
-                onClick = {},
+                onClick = {sendIntent.invoke(RegisterIntent.RegisterButtonClicked)},
                 textFontWeight = FontWeight.Normal,
                 textFontSize = 16.sp,
             )
@@ -238,7 +254,7 @@ fun RegisterUiContent() {
             AuthenticationAnnotatedText(
                 firstText = UiText.Resource(Res.string.have_an_account),
                 secondText = UiText.Resource(Res.string.login),
-                onCreateAccountClicked = {}
+                onCreateAccountClicked = {sendIntent.invoke(RegisterIntent.AlreadyHaveAccountClicked)}
             )
         }
     }

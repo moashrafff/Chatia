@@ -32,18 +32,13 @@ object RegisterValidator {
         else -> RegisterUIError.NoError
     }
 
-    fun termsError(accepted: Boolean): RegisterUIError =
-        if (accepted) RegisterUIError.NoError else RegisterUIError.TermsNotAccepted
-
     fun isRegisterValid(
-        usernameError: RegisterUIError,
         emailError: RegisterUIError,
         phoneError: RegisterUIError,
         passwordError: RegisterUIError,
         confirmPasswordError: RegisterUIError,
-        termsError: RegisterUIError
     ): Boolean = listOf(
-        usernameError, emailError, phoneError, passwordError, confirmPasswordError, termsError
+        emailError, phoneError, passwordError, confirmPasswordError
     ).all { it == RegisterUIError.NoError }
 
 
