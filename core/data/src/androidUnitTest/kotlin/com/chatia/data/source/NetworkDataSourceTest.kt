@@ -10,14 +10,8 @@ import io.ktor.http.HttpStatusCode
 import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.TestScope
-import kotlinx.coroutines.test.UnconfinedTestDispatcher
-import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
-import kotlin.test.AfterTest
-import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
@@ -26,21 +20,8 @@ import kotlin.test.assertTrue
 @OptIn(ExperimentalCoroutinesApi::class)
 class NetworkDataSourceTest {
 
-    val dispatcher = UnconfinedTestDispatcher()
-    val scope = TestScope(context = dispatcher)
-
-
-    @BeforeTest
-    fun setup() {
-    }
-
-    @AfterTest
-    fun tearDown() {
-        Dispatchers.resetMain()
-    }
-
     @Test
-    fun `performRequest should handle SocketTimeoutException and return error with code 400`() = run {
+    fun `performRequest should handle SocketTimeoutException and return error with code 400`() = runTest {
 
         // Given
         val mockResponse = mockk<HttpResponse>()
@@ -51,7 +32,6 @@ class NetworkDataSourceTest {
 
 
         val networkDataSource = NetworkDataSource(mockService)
-        scope.runTest {
             // When
             val result = networkDataSource.performRequest<HttpResponse, HttpResponse>(
                 request = { return@performRequest mockResponse },
@@ -73,12 +53,10 @@ class NetworkDataSourceTest {
                 result.errorMessage().code
             )
             assertEquals("Connection timeout", result.errorMessage().message)
-        }
     }
 
     @Test
     fun `performRequest should handle generic Exception and return error with code -1 and exception message`() = runTest {
-        scope.runTest {
             // Given
             val mockService = mockk<Service>()
             val networkDataSource = NetworkDataSource(mockService)
@@ -107,6 +85,5 @@ class NetworkDataSourceTest {
                 result.errorMessage().code
             )
             assertEquals("dummy", result.errorMessage().message)
-        }
     }
 }
