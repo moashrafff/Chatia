@@ -1,8 +1,8 @@
 package com.chatia.login.presentation.protocol
 
+import com.chatia.domain.model.ErrorMessage
 import com.chatia.login.presentation.error.LoginUIError
 import com.chatia.login.presentation.model.LoginUIModel
-import com.chatia.presentation.model.ErrorMessage
 import com.mmk.kmpauth.google.GoogleUser
 
 sealed interface LoginIntent {

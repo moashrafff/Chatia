@@ -1,19 +1,23 @@
 package com.chatia.login.data.remote
 
-import com.chatia.login.data.model.LoginRequestDto
+import com.chatia.data.service.RequestDto
+import com.chatia.data.service.Service
+import io.ktor.client.call.body
 import io.ktor.client.request.post
+import io.ktor.client.request.setBody
 import io.ktor.client.statement.HttpResponse
-import io.ktor.http.buildUrl
-import io.ktor.utils.io.InternalAPI
+import io.ktor.http.ContentType
+import io.ktor.http.contentType
 
-class LoginService {
+class LoginServiceImpl : Service {
 
-    @OptIn(InternalAPI::class)
-    suspend fun login(username: String, password: String): HttpResponse =
-        Ktor.client.post {
-            buildUrl {
-                Ktor.LOGIN
-            }
-            body = LoginRequestDto(password = password, userName = username)
-    }
+    override suspend fun request(requestDto: RequestDto): HttpResponse =
+        Ktor.client.post(
+            Ktor.LOGIN) {
+            contentType(ContentType.Application.Json)
+            setBody(requestDto)
+        }.body()
 }
+
+
+

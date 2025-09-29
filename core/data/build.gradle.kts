@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.kotlinxSerialization)
 
 }
 
@@ -53,9 +54,7 @@ kotlin {
             implementation(libs.androidx.lifecycle.runtimeCompose)
             implementation(projects.shared)
 
-
             implementation(project(":core:domain"))
-
             // Koin
             api(libs.koin.core)
 
@@ -68,9 +67,22 @@ kotlin {
             implementation(libs.ktor.serialization.kotlinx.json)
             api(libs.koin.core)
 
+            implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.9.0")
+
+
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
+            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
+            implementation("io.ktor:ktor-client-mock:2.3.7")
+        }
+        
+        androidUnitTest.dependencies {
+            implementation("io.mockk:mockk:1.13.8")
+        }
+
+        commonTest.dependencies {
+            implementation("co.touchlab:kermit:2.0.0") // For logging in tests
         }
     }
 }

@@ -4,10 +4,11 @@ import androidx.compose.runtime.Composable
 import com.chatia.presentation.component.EmptyScreen
 import com.chatia.presentation.component.ErrorOverlay
 import com.chatia.presentation.component.PrimaryLoading
-import com.chatia.presentation.model.ErrorMessage
+import com.chatia.domain.model.ErrorMessage
 import com.chatia.presentation.model.UiText
 import com.chatia.presentation.resources.Res
 import com.chatia.presentation.resources.empty
+
 
 sealed class StateRenderer<out S, O> {
     class ScreenContent<S, O>(val viewState: S) : StateRenderer<S, O>()

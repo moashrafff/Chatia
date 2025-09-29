@@ -3,10 +3,12 @@ package com.chatia.login.presentation.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import co.touchlab.kermit.Logger
+import com.chatia.login.domain.usecase.LoginUseCase
 import com.chatia.login.presentation.error.LoginUIError
 import com.chatia.login.presentation.model.LoginUIModel
 import com.chatia.login.presentation.protocol.LoginEffect
-import com.chatia.login.presentation.protocol.LoginEffect.*
+import com.chatia.login.presentation.protocol.LoginEffect.NavigateToForgetPassword
+import com.chatia.login.presentation.protocol.LoginEffect.NavigateToRegister
 import com.chatia.login.presentation.protocol.LoginIntent
 import com.chatia.login.presentation.protocol.LoginState
 import com.chatia.login.presentation.validation.LoginValidator
@@ -16,9 +18,10 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class LoginViewModel : ViewModel() {
+class LoginViewModel(private val loginUseCase: LoginUseCase, ): ViewModel() {
 
     private var loginState = LoginState()
 
@@ -104,8 +107,22 @@ class LoginViewModel : ViewModel() {
         updateState { copy(isRememberMeChecked = !checked) }
     }
 
-    private fun loginWithUserNameAndPassword(username: String, password: String) {
-
+    private fun loginWithUserNameAndPassword(username: String, password: String) = viewModelScope.launch{
+        _stateRendererMutableState.update {
+            StateRenderer.LoadingScreen(loginState)
+        }
+        loginUseCase.execute(
+            input = LoginUseCase.Input(
+                username = username,
+                password = password,
+            ),
+            success = {response->
+                _stateRendererMutableState.value= StateRenderer.Success(loginState.loginUIModel)
+            },
+            error = {errorMessage ->
+                _stateRendererMutableState.value= StateRenderer.ErrorPopup(loginState,errorMessage=errorMessage)
+            }
+        )
     }
 
 }

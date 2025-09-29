@@ -86,6 +86,10 @@ kotlin {
             api(libs.koin.core)
             implementation(libs.koin.compose)
             implementation(libs.koin.composeVM)
+            implementation("io.ktor:ktor-client-logging:3.2.2")
+
+
+            implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.9.0")
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

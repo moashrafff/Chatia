@@ -29,6 +29,7 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
+            implementation(project(":core:domain"))
             // UI Components
             implementation(libs.chatia.ui.components)
 
