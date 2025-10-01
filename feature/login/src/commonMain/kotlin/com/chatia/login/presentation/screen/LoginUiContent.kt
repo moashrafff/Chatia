@@ -67,6 +67,7 @@ import com.chatia.ui.components.inputFields.PrimaryInputField
 import com.chatia.ui.components.texts.PrimaryText
 import com.chatia.ui.components.verticalGradientStops
 import com.mmk.kmpauth.google.GoogleButtonUiContainer
+import dev.gitlive.firebase.auth.FacebookAuthProvider
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
@@ -266,6 +267,43 @@ fun LoginUiContent(
                     }
                 )
             }
+
+            Spacer(modifier = Modifier.height(28.dp))
+
+
+//Facebook button with icon
+            FacebookButtonUiContainer(
+                onResult = { result -> /* handle FirebaseUser result or error */ },
+                linkAccount = false
+            ) {
+//                FacebookSignInButtonIconOnly(onClick = { this.onClick() })
+            }
+
+            PrimaryButton(
+                    modifier = Modifier.height(52.dp).fillMaxWidth(),
+                    buttonColors = ButtonDefaults.buttonColors(
+                        containerColor = Color.White,
+                    ),
+                    text = UiText.Resource(Res.string.login_with_google).asString(),
+                    onClick = {
+                        onIntentChange.invoke(LoginIntent.OnFacebookLoginClicked )
+                    },
+                    textFontWeight = FontWeight.Normal,
+                    textColor = MaterialTheme.colorScheme.onSurface,
+                    textFontSize = 16.sp,
+                    icon = {
+                        Icon(
+                            modifier = Modifier.size(20.dp),
+                            painter = painterResource(Res.drawable.google_icon),
+                            contentDescription = UiText.Resource(Res.string.login_with_google)
+                                .asString(),
+                            tint = Color.Unspecified
+                        )
+                    }
+                )
+
+
+
             Spacer(modifier = Modifier.weight(1f))
             AuthenticationAnnotatedText(
                 firstText = UiText.Resource(Res.string.dont_have_account),

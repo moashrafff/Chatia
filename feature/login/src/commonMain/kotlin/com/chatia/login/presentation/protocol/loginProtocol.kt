@@ -12,6 +12,7 @@ sealed interface LoginIntent {
     data object PasswordVisibleClicked : LoginIntent
     data object ForgetPasswordClicked : LoginIntent
     data object OnLoginClicked : LoginIntent
+    data object OnFacebookLoginClicked : LoginIntent
     data class LoginWithGoogleClickedResult(val googleUser: GoogleUser?) : LoginIntent
     data object LoginWithAppleClicked : LoginIntent
     data object CreateAccountClicked : LoginIntent

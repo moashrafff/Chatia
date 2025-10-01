@@ -57,6 +57,9 @@ class LoginViewModel : ViewModel() {
             }
             is LoginIntent.RememberMeClicked -> toggleRememberMe()
             is LoginIntent.PasswordVisibleClicked -> togglePasswordVisibility()
+            LoginIntent.OnFacebookLoginClicked -> {
+                //todo
+            }
         }
     }
 

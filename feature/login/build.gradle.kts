@@ -54,6 +54,8 @@ kotlin {
 
             implementation("io.github.mirzemehdi:kmpauth-google:2.3.1") //Google One Tap Sign-In
             implementation("io.github.mirzemehdi:kmpauth-firebase:2.3.1") //Integrated Authentications with Firebase
+            implementation("io.github.mirzemehdi:kmpauth-uihelper:2.3.1") //UiHelper SignIn buttons (AppleSignIn, GoogleSignInButton)
+
             implementation("co.touchlab:kermit:2.0.8")
 
             implementation(project(":core:presentation"))
