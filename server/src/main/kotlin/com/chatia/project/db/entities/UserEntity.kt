@@ -15,6 +15,6 @@ class UserEntity(id: EntityID<Int>): IntEntity(id) {
     var phoneNumber by UsersTable.phoneNumber
 
     fun toUser()= User(
-        id.value, userName = userName, email = email, phoneNumber = phoneNumber,
+        id=id.value, userName = userName, email = email, phoneNumber = phoneNumber,password = password
     )
 }

@@ -11,7 +11,6 @@ import io.ktor.server.application.install
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
 import io.ktor.server.plugins.contentnegotiation.ContentNegotiation
-import org.jetbrains.exposed.v1.core.dao.id.IntIdTable
 import org.koin.ktor.ext.get
 
 
