@@ -32,6 +32,7 @@ dependencyResolutionManagement {
         mavenLocal()
     }
 }
+include(":auth")
 
 include(":core:presentation")
 include(":core:domain")

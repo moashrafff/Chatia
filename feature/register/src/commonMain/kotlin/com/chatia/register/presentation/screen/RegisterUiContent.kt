@@ -9,9 +9,12 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeContentPadding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.relocation.BringIntoViewRequester
+import androidx.compose.foundation.relocation.bringIntoViewRequester
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -21,9 +24,12 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.focus.onFocusEvent
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -56,6 +62,7 @@ import com.chatia.ui.components.buttons.PrimaryButton
 import com.chatia.ui.components.inputFields.PrimaryInputField
 import com.chatia.ui.components.texts.PrimaryText
 import com.chatia.ui.components.verticalGradientStops
+import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -72,6 +79,7 @@ fun RegisterUiContent(
                 0.12f to Color(0xFFFFFFFF), 0.24f to Color(0xFFFFE5F9), 0.66f to Color(0xFFFFF7EB)
             )
             .fillMaxSize()
+            .imePadding()
             .applyIf(condition = isAndroid(), modifier = { padding(bottom = 8.dp) }),
 
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -82,13 +90,16 @@ fun RegisterUiContent(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Spacer(modifier = Modifier.height(32.dp))
+
             Image(
                 modifier = Modifier.size(136.dp),
                 painter = painterResource(com.chatia.presentation.resources.Res.drawable.chatia_logo),
                 contentDescription = UiText.Resource(com.chatia.presentation.resources.Res.string.chatia_logo_content_description)
                     .asString()
             )
+
             Spacer(modifier = Modifier.height(24.dp))
+
             PrimaryText(
                 text = UiText.Resource(Res.string.register_title).asString(),
                 fontWeight = FontWeight.Medium,
@@ -96,7 +107,9 @@ fun RegisterUiContent(
                 textAlign = TextAlign.Center,
                 lineHeight = 32.sp
             )
+
             Spacer(modifier = Modifier.height(32.dp))
+
             PrimaryInputField(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(48.dp),
@@ -114,7 +127,9 @@ fun RegisterUiContent(
                 value = uiState.registerUIModel.userName,
                 onValueChange = {sendIntent.invoke(RegisterIntent.UserNameUpdated(it))}
             )
+
             Spacer(modifier = Modifier.height(16.dp))
+
             PrimaryInputField(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(48.dp),
@@ -134,7 +149,9 @@ fun RegisterUiContent(
                 isError = uiState.showEmailError(),
                 errorText = stringResource(uiState.emailError.getErrorMessage())
             )
+
             Spacer(modifier = Modifier.height(16.dp))
+
             PrimaryInputField(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(48.dp),
@@ -180,7 +197,9 @@ fun RegisterUiContent(
                 isError = uiState.showPhoneError(),
                 errorText = stringResource(uiState.phoneError.getErrorMessage())
             )
+
             Spacer(modifier = Modifier.height(16.dp))
+
             PrimaryInputField(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(48.dp),
@@ -211,7 +230,9 @@ fun RegisterUiContent(
                 },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
             )
+
             Spacer(modifier = Modifier.height(16.dp))
+
             PrimaryInputField(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(48.dp),
@@ -242,7 +263,9 @@ fun RegisterUiContent(
                 },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
             )
+
             Spacer(modifier = Modifier.height(32.dp))
+
             PrimaryButton(
                 modifier = Modifier.height(52.dp).fillMaxWidth(),
                 text = UiText.Resource(Res.string.register).asString(),
@@ -250,7 +273,9 @@ fun RegisterUiContent(
                 textFontWeight = FontWeight.Normal,
                 textFontSize = 16.sp,
             )
+
             Spacer(modifier = Modifier.weight(1f))
+
             AuthenticationAnnotatedText(
                 firstText = UiText.Resource(Res.string.have_an_account),
                 secondText = UiText.Resource(Res.string.login),

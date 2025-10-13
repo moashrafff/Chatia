@@ -56,7 +56,7 @@ fun AppScaffold(
     Scaffold (
         modifier = Modifier
             .fillMaxSize(),
-        contentWindowInsets = WindowInsets(0, 0, 0, 0),
+        contentWindowInsets = WindowInsets(0),
         content = {
             NavHost(
                 modifier = Modifier.padding(it),
