@@ -20,6 +20,7 @@ fun LoginScreen(
         }
         onLoadingState {}
         onSuccess { loginUiModel ->
+            //todo navigate to home
         }
         onEmpty {}
         onErrorState { updatedState ->

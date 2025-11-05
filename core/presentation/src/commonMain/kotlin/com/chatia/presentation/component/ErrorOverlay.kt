@@ -28,7 +28,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import coil3.compose.AsyncImage
-import com.chatia.presentation.model.ErrorMessage
+import com.chatia.domain.model.ErrorMessage
 import com.chatia.presentation.model.UiText
 import com.chatia.presentation.model.asString
 import com.chatia.presentation.resources.Res
