@@ -1,0 +1,17 @@
+<resources>
+    <string name="login_title">Login to your account</string>
+    <string name="username_placeholder">Username</string>
+    <string name="password_placeholder">Password</string>
+    <string name="remember_me">Remember me</string>
+    <string name="password_icon_content_description">Password Icon</string>
+    <string name="forget_password">Forgot password?</string>
+    <string name="sign_in">Sign In</string>
+    <string name="or_login_with">or Login with</string>
+    <string name="login_with_google">Login with Google</string>
+    <string name="login_with_apple">Login with Apple</string>
+    <string name="dont_have_account">Don’t have an account? </string>
+    <string name="create_an_account">Create an Account</string>
+    <string name="incorrect_password">Incorrect Password</string>
+    <string name="incorrect_password_length">Incorrect Password Length</string>
+    <string name="empty_text"> </string>
+</resources>

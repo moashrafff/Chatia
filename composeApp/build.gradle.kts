@@ -1,4 +1,3 @@
-import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
@@ -7,6 +6,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
+    id("com.google.gms.google-services")
 }
 
 kotlin {
@@ -16,6 +16,10 @@ kotlin {
             jvmTarget.set(JvmTarget.JVM_11)
         }
     }
+
+    iosArm64()
+    iosX64()
+    iosSimulatorArm64()
     
     listOf(
         iosX64(),
@@ -27,13 +31,21 @@ kotlin {
             isStatic = true
         }
     }
-    
+
     sourceSets {
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
+
+            implementation(libs.koin.android)
+            implementation(libs.koin.androidx.compose)
+            implementation("com.google.firebase:firebase-config:22.1.1")
+
         }
         commonMain.dependencies {
+            // UI Components
+            implementation(libs.chatia.ui.components)
+
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material3)
@@ -43,6 +55,18 @@ kotlin {
             implementation(libs.androidx.lifecycle.viewmodelCompose)
             implementation(libs.androidx.lifecycle.runtimeCompose)
             implementation(projects.shared)
+
+            // Navigation
+            implementation(libs.navigation.compose)
+
+            implementation("io.github.mirzemehdi:kmpauth-google:2.3.1") //Google One Tap Sign-In
+            implementation("io.github.mirzemehdi:kmpauth-firebase:2.3.1") //Integrated Authentications with Firebase
+
+            implementation(project(path = ":feature:onBoarding"))
+            implementation(project(path = ":feature:login"))
+            implementation(project(path = ":core:navigator"))
+            implementation(project(path = ":core:presentation"))
+
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -60,6 +84,11 @@ android {
         targetSdk = libs.versions.android.targetSdk.get().toInt()
         versionCode = 1
         versionName = "1.0"
+    }
+    lint {
+        abortOnError = false
+        checkReleaseBuilds = false
+        disable += setOf("NullSafeMutableLiveData") // the crashing detector
     }
     packaging {
         resources {

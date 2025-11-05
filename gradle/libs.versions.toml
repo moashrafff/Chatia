@@ -17,10 +17,23 @@ junit = "4.13.2"
 koinKtor = "4.1.0"
 koinLoggerSlf4j = "4.1.0"
 kotlin = "2.2.0"
+composeMultiplatform = "1.9.0"
+junit = "4.13.2"
+kotlin = "2.2.20"
 ktor = "3.2.2"
 ktorServerAuth = "3.2.1"
 logback = "1.5.18"
 mysqlConnectorJava = "8.0.33"
+# maven-central
+chatia-ui-components = "0.0.1"
+# maven-local
+chatia-ui-components-local = "0.0.6-SNAPSHOT"
+navigationCompose = "2.9.0-beta05"
+koin-version = "4.1.0-Beta11"
+koinComposeMultiplatform = "4.1.0"
+koin-compose = "1.2.0-Beta4"
+composeHotReload = "1.0.0-alpha10"
+cameraCore = "1.5.0"
 
 [libraries]
 exposed-core = { module = "org.jetbrains.exposed:exposed-core", version.ref = "exposedCore" }
@@ -51,6 +64,27 @@ ktor-serverNetty = { module = "io.ktor:ktor-server-netty-jvm", version.ref = "kt
 ktor-serverTestHost = { module = "io.ktor:ktor-server-test-host-jvm", version.ref = "ktor" }
 mysql-connector-java = { module = "mysql:mysql-connector-java", version.ref = "mysqlConnectorJava" }
 
+# Navigation
+navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
+
+# UI Components
+chatia-ui-components = { module = "io.github.moashrafff:chatia-ui-components", version.ref = "chatia-ui-components-local" }
+
+#koin
+koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin-version" }
+koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koin-version" }
+koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin-version" }
+koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koinComposeMultiplatform" }
+koin-compose-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koinComposeMultiplatform" }
+
+ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
+ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
+ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }
+ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
+ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
+koin-composeVM = { module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koin-compose" }
+androidx-camera-core = { group = "androidx.camera", name = "camera-core", version.ref = "cameraCore" }
+
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
@@ -59,3 +93,5 @@ composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "k
 kotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 ktor = { id = "io.ktor.plugin", version.ref = "ktor" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+composeHotReload = { id = "org.jetbrains.compose.hot-reload", version.ref = "composeHotReload" }
+kotlinxSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }

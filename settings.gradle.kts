@@ -11,6 +11,7 @@ pluginManagement {
             }
         }
         mavenCentral()
+        mavenLocal()
         gradlePluginPortal()
     }
 }
@@ -24,10 +25,22 @@ dependencyResolutionManagement {
                 includeGroupAndSubgroups("com.google")
             }
         }
+        maven {
+            url = uri("https://androidx.dev/snapshots/builds/13508953/artifacts/repository")
+        }
         mavenCentral()
+        mavenLocal()
     }
 }
 
+include(":core:presentation")
+include(":core:domain")
+include(":core:navigator")
+include(":core:utils")
+include(":feature:onBoarding")
+include(":feature:login")
 include(":composeApp")
 include(":server")
 include(":shared")
+include(":core:data")
+include(":utils")
