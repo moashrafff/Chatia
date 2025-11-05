@@ -9,14 +9,14 @@ androidx-core = "1.16.0"
 androidx-espresso = "3.6.1"
 androidx-lifecycle = "2.9.1"
 androidx-testExt = "1.2.1"
-composeMultiplatform = "1.8.2"
+#composeMultiplatform = "1.8.2"
 exposedCore = "1.0.0-beta-3"
 h2 = "2.3.232"
 jbcrypt = "0.4"
-junit = "4.13.2"
+#junit = "4.13.2"
 koinKtor = "4.1.0"
 koinLoggerSlf4j = "4.1.0"
-kotlin = "2.2.0"
+#kotlin = "2.2.0"
 composeMultiplatform = "1.9.0"
 junit = "4.13.2"
 kotlin = "2.2.20"
@@ -43,7 +43,7 @@ h2 = { module = "com.h2database:h2", version.ref = "h2" }
 jbcrypt = { module = "org.mindrot:jbcrypt", version.ref = "jbcrypt" }
 koin-logger-slf4j = { module = "io.insert-koin:koin-logger-slf4j", version.ref = "koinLoggerSlf4j" }
 koin-ktor = { module = "io.insert-koin:koin-ktor", version.ref = "koinKtor" }
-ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktorServerAuth" }
+#ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktorServerAuth" }
 ktor-server-auth = { module = "io.ktor:ktor-server-auth", version.ref = "ktorServerAuth" }
 ktor-server-auth-jwt = { module = "io.ktor:ktor-server-auth-jwt", version.ref = "ktorServerAuth" }
 ktor-server-config-yaml = { module = "io.ktor:ktor-server-config-yaml", version.ref = "ktor" }
