@@ -10,4 +10,5 @@
     <string name="inspiration_any_time_description">Find fresh ideas, motivation, and creative solutions whenever you need them.</string>
     <string name="register">Register</string>
     <string name="login">Login</string>
+    <string name="empty">Empty Content</string>
 </resources>

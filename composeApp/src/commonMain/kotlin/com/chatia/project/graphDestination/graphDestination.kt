@@ -2,10 +2,14 @@ package com.chatia.project.graphDestination
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
+import com.chatia.login.presentation.protocol.LoginEffect
 import com.chatia.login.presentation.screen.LoginScreen
+import com.chatia.login.presentation.viewmodel.LoginViewModel
 import com.chatia.navigator.core.AppNavigator
 import com.chatia.navigator.destination.navigationDestination.NavigationDestination
 import com.chatia.navigator.destination.screensDestination.LoginDestination
@@ -32,7 +36,22 @@ private val composableDestinations: Map<NavigationDestination, @Composable (
         OnBoardingScreen(viewmodel::setIntent)
     },
     LoginDestination to { appNavigator, navHostController ->
-        LoginScreen()
+        val viewmodel: LoginViewModel = koinViewModel()
+        val stateRenderer by viewmodel.stateRendererFlow.collectAsState()
+        LaunchedEffect(Unit) {
+            viewmodel.viewEffect.collect { output ->
+                when (output) {
+                    is LoginEffect.NavigateToForgetPassword -> Unit
+                    is LoginEffect.NavigateToHome -> Unit
+                    is LoginEffect.NavigateToRegister -> Unit
+                    is LoginEffect.ShowError -> Unit
+                }
+            }
+        }
+        LoginScreen(
+            stateRenderer = stateRenderer,
+            onIntentChange = viewmodel::sendIntent
+        )
     },
 )
 
