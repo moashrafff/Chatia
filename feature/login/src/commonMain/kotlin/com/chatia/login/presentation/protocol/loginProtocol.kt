@@ -25,7 +25,10 @@ sealed interface LoginEffect {
 }
 
 data class LoginState(
-    val loginUIModel: LoginUIModel = LoginUIModel(userName = "", password = ""),
+    val loginUIModel: LoginUIModel = LoginUIModel(
+        userName = "maryam123",
+        password = "LKii22@@",
+        ),
     val isLoginButtonEnabled: Boolean = false,
     val isPasswordVisible: Boolean = false,
     val isRememberMeChecked: Boolean = false,

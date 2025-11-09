@@ -15,7 +15,7 @@ object RegisterValidator {
 
     fun phoneError(phone: String): RegisterUIError = when {
         phone.isEmpty() -> RegisterUIError.NoEntry
-        !phone.matches(Regex("""^\+?[0-9]{7,15}$""")) -> RegisterUIError.InvalidPhone
+        !phone.matches(Regex("""^\+?[0-9\s\-()]{7,20}$""")) -> RegisterUIError.InvalidPhone
         else -> RegisterUIError.NoError
     }
 

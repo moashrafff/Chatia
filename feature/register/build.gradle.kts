@@ -6,6 +6,8 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.composeHotReload)
+    alias(libs.plugins.kotlinxSerialization)
 }
 
 kotlin {
@@ -57,6 +59,23 @@ kotlin {
             implementation(project(":core:presentation"))
             implementation(project(":core:domain"))
             implementation(project(":core:utils"))
+            implementation(project(":core:presentation"))
+            implementation(project(":core:data"))
+
+
+            //ktor
+            implementation(libs.ktor.client.core)
+            implementation(libs.ktor.client.content.negotiation)
+            implementation(libs.ktor.serialization.kotlinx.json)
+            api(libs.koin.core)
+            implementation(libs.koin.compose)
+            implementation(libs.koin.composeVM)
+            implementation("io.ktor:ktor-client-logging:3.2.2")
+
+            implementation("com.stevdza-san:countrypicker:1.0.4")
+
+            implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.9.0")
+
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

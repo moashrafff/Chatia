@@ -2,20 +2,23 @@ package com.chatia.register.presentation.protocol
 
 import com.chatia.register.presentation.error.RegisterUIError
 import com.chatia.register.presentation.model.RegisterUIModel
+import com.stevdza_san.library.domain.Country
 
 data class RegisterUiState(
     val registerUIModel: RegisterUIModel = RegisterUIModel(
-        userName = "",
-        email = "",
-        phone = "",
-        password = "",
-        confirmPassword = ""
+        userName = "maryam123",
+        email = "maryam@gmail.com",
+        phone = "090909-09090909",
+        password = "LKii22@@",
+        confirmPassword = "LKii22@@",
+        country=Country.Egypt
     ),
     val passwordError: RegisterUIError = RegisterUIError.NoError,
     val confirmPasswordError: RegisterUIError = RegisterUIError.NoError,
     val emailError: RegisterUIError = RegisterUIError.NoError,
     val phoneError: RegisterUIError = RegisterUIError.NoError,
-    val isRegisterButtonEnabled: Boolean = false
+    val isRegisterButtonEnabled: Boolean = false,
+    val showCountryDialog: Boolean = false
 ) {
     fun showPasswordError() =
         passwordError != RegisterUIError.NoError && passwordError != RegisterUIError.NoEntry
@@ -36,6 +39,8 @@ sealed interface RegisterIntent {
     data class ConfirmPasswordUpdated(val confirmPassword: String) : RegisterIntent
     data class EmailUpdated(val email: String) : RegisterIntent
     data class PhoneUpdated(val phone: String) : RegisterIntent
+    data class CountryUpdated(val country: Country) : RegisterIntent
+    data class ShowCountryDialog(val showCountryDialog: Boolean) : RegisterIntent
     data object RegisterButtonClicked : RegisterIntent
     data object AlreadyHaveAccountClicked: RegisterIntent
 }

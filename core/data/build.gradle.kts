@@ -67,7 +67,12 @@ kotlin {
             implementation(libs.ktor.serialization.kotlinx.json)
             api(libs.koin.core)
 
+            implementation("io.ktor:ktor-client-logging:3.2.2")
             implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.9.0")
+            implementation(libs.ktor.client.core)
+            implementation(libs.ktor.client.content.negotiation)
+            implementation(libs.ktor.serialization.kotlinx.json)
+            api(libs.koin.core)
 
 
         }

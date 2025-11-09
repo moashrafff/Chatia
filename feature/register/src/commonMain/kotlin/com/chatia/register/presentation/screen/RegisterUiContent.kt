@@ -1,10 +1,9 @@
 package com.chatia.register.presentation.screen
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -13,10 +12,7 @@ import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeContentPadding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.relocation.BringIntoViewRequester
-import androidx.compose.foundation.relocation.bringIntoViewRequester
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
@@ -24,12 +20,8 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.focus.onFocusEvent
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -37,7 +29,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cahatia.feature.register.generated.resources.Res
-import cahatia.feature.register.generated.resources.down_arrow
 import cahatia.feature.register.generated.resources.email_placeholder
 import cahatia.feature.register.generated.resources.have_an_account
 import cahatia.feature.register.generated.resources.login
@@ -47,7 +38,6 @@ import cahatia.feature.register.generated.resources.password_placeholder
 import cahatia.feature.register.generated.resources.phone_number_placeholder
 import cahatia.feature.register.generated.resources.register
 import cahatia.feature.register.generated.resources.register_title
-import cahatia.feature.register.generated.resources.us_flag
 import cahatia.feature.register.generated.resources.username_placeholder
 import com.chatia.presentation.applyIf
 import com.chatia.presentation.component.AuthenticationAnnotatedText
@@ -62,7 +52,8 @@ import com.chatia.ui.components.buttons.PrimaryButton
 import com.chatia.ui.components.inputFields.PrimaryInputField
 import com.chatia.ui.components.texts.PrimaryText
 import com.chatia.ui.components.verticalGradientStops
-import kotlinx.coroutines.launch
+import com.stevdza_san.library.component.CountryPickerDialog
+import com.stevdza_san.library.component.CountryPickerField
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -84,6 +75,19 @@ fun RegisterUiContent(
 
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
+
+        AnimatedVisibility(visible = uiState.showCountryDialog) {
+            CountryPickerDialog(
+                selectedCountry = uiState.registerUIModel.country,
+                onConfirmClick = { country ->
+                    sendIntent(RegisterIntent.CountryUpdated(country))
+                    sendIntent(RegisterIntent.ShowCountryDialog(false))
+                },
+                onDismiss = { sendIntent(RegisterIntent.ShowCountryDialog(false)) }
+            )
+        }
+
+
         Column(
             modifier = Modifier.fillMaxSize().safeContentPadding()
                 .padding(horizontal = 10.dp).verticalScroll(rememberScrollState()),
@@ -167,30 +171,14 @@ fun RegisterUiContent(
                 ),
                 placeholder = UiText.Resource(Res.string.phone_number_placeholder).asString(),
                 leadingIcon = {
-                    Row(
-                        modifier = Modifier.padding(start = 12.dp, end = 8.dp),
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(4.dp)
-                    ) {
-                        Icon(
-                            modifier = Modifier.size(16.dp).clip(CircleShape),
-                            painter = painterResource(Res.drawable.us_flag),
-                            contentDescription = null,
-                            tint = Color.Unspecified
-                        )
-                        PrimaryText(
-                            text = "+1",
-                            color = MaterialTheme.colorScheme.onSurface,
-                            fontSize = 14.sp,
-                            fontWeight = FontWeight.Normal
-                        )
-                        Icon(
-                            modifier = Modifier.size(10.dp),
-                            painter = painterResource(Res.drawable.down_arrow),
-                            contentDescription = null,
-                            tint = Color.Unspecified
-                        )
-                    }
+                    CountryPickerField(
+                        borderColor=Color.Transparent,
+                        containerColor = Color.Transparent,
+                        selectedCountry = uiState.registerUIModel.country,
+                        onClick = {
+                            sendIntent(RegisterIntent.ShowCountryDialog(true))
+                        }
+                    )
                 },
                 value = uiState.registerUIModel.phone,
                 onValueChange = {sendIntent.invoke(RegisterIntent.PhoneUpdated(it))},

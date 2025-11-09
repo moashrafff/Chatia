@@ -1,5 +1,6 @@
 package com.chatia.project.di
 
+import com.chatia.data.di.dataModule
 import com.chatia.login.di.loginModule
 import com.chatia.navigator.di.navigationModule
 import com.chatia.onBoarding.di.onBoardingModule
@@ -10,6 +11,6 @@ import org.koin.core.context.startKoin
 fun initKoin(config: KoinAppDeclaration? = null) {
     startKoin {
         config?.invoke(this)
-        modules(navigationModule, onBoardingModule, loginModule, registerModule)
+        modules(dataModule,navigationModule, onBoardingModule, registerModule,loginModule)
     }
 }
