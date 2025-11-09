@@ -6,11 +6,11 @@ import com.stevdza_san.library.domain.Country
 
 data class RegisterUiState(
     val registerUIModel: RegisterUIModel = RegisterUIModel(
-        userName = "maryam123",
-        email = "maryam@gmail.com",
-        phone = "090909-09090909",
-        password = "LKii22@@",
-        confirmPassword = "LKii22@@",
+        userName = "",
+        email = "",
+        phone = "",
+        password = "",
+        confirmPassword = "",
         country=Country.Egypt
     ),
     val passwordError: RegisterUIError = RegisterUIError.NoError,
