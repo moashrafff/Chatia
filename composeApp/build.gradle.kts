@@ -64,7 +64,9 @@ kotlin {
 
             implementation(project(path = ":feature:onBoarding"))
             implementation(project(path = ":feature:login"))
+            implementation(project(path = ":feature:register"))
             implementation(project(path = ":core:navigator"))
+            implementation(project(path = ":core:data"))
             implementation(project(path = ":core:presentation"))
 
         }

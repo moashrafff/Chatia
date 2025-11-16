@@ -12,13 +12,14 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeContentPadding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.ButtonDefaults
@@ -39,6 +40,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cahatia.feature.login.generated.resources.Res
+import cahatia.feature.login.generated.resources.create_an_account
+import cahatia.feature.login.generated.resources.dont_have_account
 import cahatia.feature.login.generated.resources.forget_password
 import cahatia.feature.login.generated.resources.google_icon
 import cahatia.feature.login.generated.resources.login_title
@@ -50,10 +53,10 @@ import cahatia.feature.login.generated.resources.password_placeholder
 import cahatia.feature.login.generated.resources.remember_me
 import cahatia.feature.login.generated.resources.sign_in
 import cahatia.feature.login.generated.resources.username_placeholder
-import com.chatia.login.presentation.component.CreateAccountAnnotatedText
 import com.chatia.login.presentation.protocol.LoginIntent
 import com.chatia.login.presentation.protocol.LoginState
 import com.chatia.presentation.applyIf
+import com.chatia.presentation.component.AuthenticationAnnotatedText
 import com.chatia.presentation.model.UiText
 import com.chatia.presentation.model.asString
 import com.chatia.presentation.resources.chatia_logo
@@ -77,15 +80,18 @@ fun LoginUiContent(
             .verticalGradientStops(
                 0.12f to Color(0xFFFFFFFF), 0.24f to Color(0xFFFFE5F9), 0.66f to Color(0xFFFFF7EB)
             )
-            .applyIf(condition = isAndroid(), modifier = { padding(bottom = 8.dp) })
-            .fillMaxSize(),
+            .fillMaxSize()
+            .applyIf(condition = isAndroid(), modifier = { padding(bottom = 8.dp) }),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Column(
-            modifier = Modifier.fillMaxSize().safeContentPadding().imePadding()
-                .padding(horizontal = 10.dp),
+            modifier = Modifier.fillMaxSize()
+                .safeContentPadding()
+                .padding(horizontal = 10.dp)
+                .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
+        )
+        {
             Spacer(modifier = Modifier.height(32.dp))
             Image(
                 modifier = Modifier.size(136.dp),
@@ -261,7 +267,11 @@ fun LoginUiContent(
                 )
             }
             Spacer(modifier = Modifier.weight(1f))
-            CreateAccountAnnotatedText(onCreateAccountClicked = { onIntentChange.invoke(LoginIntent.CreateAccountClicked) })
+            AuthenticationAnnotatedText(
+                firstText = UiText.Resource(Res.string.dont_have_account),
+                secondText = UiText.Resource(Res.string.create_an_account),
+                onCreateAccountClicked = { onIntentChange.invoke(LoginIntent.CreateAccountClicked) }
+            )
         }
     }
 }

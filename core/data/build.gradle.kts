@@ -67,7 +67,12 @@ kotlin {
             implementation(libs.ktor.serialization.kotlinx.json)
             api(libs.koin.core)
 
+            implementation("io.ktor:ktor-client-logging:3.2.2")
             implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.9.0")
+            implementation(libs.ktor.client.core)
+            implementation(libs.ktor.client.content.negotiation)
+            implementation(libs.ktor.serialization.kotlinx.json)
+            api(libs.koin.core)
 
 
         }
@@ -76,7 +81,7 @@ kotlin {
             implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
             implementation("io.ktor:ktor-client-mock:2.3.7")
         }
-        
+
         androidUnitTest.dependencies {
             implementation("io.mockk:mockk:1.13.8")
         }

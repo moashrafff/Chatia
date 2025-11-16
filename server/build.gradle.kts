@@ -41,6 +41,7 @@ dependencies {
     implementation(libs.exposed.dao)
     implementation(libs.jbcrypt)
 
+    implementation("io.ktor:ktor-server-forwarded-header")
     testImplementation(libs.ktor.serverTestHost)
     testImplementation(libs.kotlin.testJunit)
     testImplementation("io.mockk:mockk:1.14.5")

@@ -16,7 +16,7 @@ import org.koin.ktor.ext.get
 
 fun main(args: Array<String>) {
     io.ktor.server.netty.EngineMain.main(args)
-    embeddedServer(Netty, port = SERVER_PORT, host = "0.0.0.0", module = Application::module)
+    embeddedServer(Netty,   host = "https://sanofi-nationalday.com", module = Application::module)
         .start(wait = true)
 }
 fun Application.module() {

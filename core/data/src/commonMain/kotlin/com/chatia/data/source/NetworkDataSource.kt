@@ -8,25 +8,25 @@ import io.ktor.client.statement.HttpResponse
 import io.ktor.client.statement.bodyAsText
 import io.ktor.http.Headers
 import io.ktor.http.isSuccess
-import kotlinx.coroutines.GlobalScope.coroutineContext
 import kotlinx.coroutines.isActive
 import kotlinx.serialization.json.Json
+import kotlin.coroutines.coroutineContext
 
 class NetworkDataSource<SERVICE>(
     val service: SERVICE,
 ) {
-     suspend inline fun <reified R,  T> performRequest(
+    suspend inline fun <reified T, reified R> performRequest(
         request: suspend SERVICE.() -> HttpResponse,
-        onSuccess: suspend (R, Headers) -> Result<T> ,
-        onEmpty: suspend () -> Result<T> ,
-        onError: suspend (ErrorResponse) -> Result<T>
-    ): Result<T> {
+        onSuccess: suspend (T, Headers) -> Result<R>,
+        onEmpty: suspend () -> Result<R>,
+        onError: suspend (ErrorResponse) -> Result<R>
+    ): Result<R> {
         try {
-            val response:HttpResponse = service.request()
+            val response: HttpResponse = service.request()
             val responseCode = response.status.value
 
             if (response.status.isSuccess()) {
-                val body = Json.decodeFromString<R>(response.bodyAsText())
+                val body = Json.decodeFromString<T>(response.bodyAsText())
 
                 return if (body != null && body != Unit) {
                     if (coroutineContext.isActive) {
@@ -38,20 +38,19 @@ class NetworkDataSource<SERVICE>(
                     // its success but body equal to null or its empty "Unit"
                     onEmpty()
                 }
-            }else{
+            } else {
                 val errorBody = response.body<ErrorResponse>()
-                return onError((errorBody).copy(errorCode = responseCode) )
+                return onError((errorBody).copy(errorCode = responseCode))
             }
         } catch (e: Exception) {
-            e.printStackTrace()
-            val error=ErrorResponse(errorMessage = e.message?:"",
+            val error = ErrorResponse(
+                errorMessage = e.message ?: "",
                 errorCode = when (e) {
                     is SocketTimeoutException -> {
-                    TIMEOUT
-
+                        TIMEOUT
                     }
                     else -> {
-                    UNKNOWN
+                        UNKNOWN
                     }
                 }
             )
@@ -60,5 +59,6 @@ class NetworkDataSource<SERVICE>(
     }
 }
 
-const val TIMEOUT=-2
-const val UNKNOWN=-1
+const val TIMEOUT = -2
+const val UNKNOWN = -1
+
