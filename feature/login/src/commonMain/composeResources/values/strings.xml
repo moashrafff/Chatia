@@ -64,4 +64,7 @@
 
     <string name="adaptive_learning_description">Chatia improves over time getting smarter with every interaction to better meet you need </string>
 
+    <string name="incorrect_password">Incorrect Password</string>
+    <string name="incorrect_password_length">Incorrect Password Length</string>
+    <string name="empty_text"> </string>
 </resources>

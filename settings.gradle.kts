@@ -32,14 +32,20 @@ dependencyResolutionManagement {
         mavenLocal()
     }
 }
+include(":auth")
 
 include(":core:presentation")
 include(":core:domain")
+include(":core:data")
 include(":core:navigator")
+include(":data")
 include(":core:utils")
 include(":feature:onBoarding")
 include(":feature:login")
+include(":feature:register")
+include(":register")
 include(":composeApp")
 include(":server")
 include(":shared")
+include(":core:data")
 include(":utils")

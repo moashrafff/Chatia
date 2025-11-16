@@ -3,8 +3,10 @@ package com.chatia.project.routingComposable
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
@@ -51,11 +53,13 @@ fun AppScaffold(
         }
     }
     
-    Column (
+    Scaffold (
         modifier = Modifier
             .fillMaxSize(),
+        contentWindowInsets = WindowInsets(0),
         content = {
             NavHost(
+                modifier = Modifier.padding(it),
                 navController = navController,
                 startDestination = Screens.OnBoardingScreenRoute.route,
                 enterTransition = { fadeIn(animationSpec = tween(500)) },
