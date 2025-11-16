@@ -28,6 +28,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -45,6 +46,7 @@ import cahatia.feature.login.generated.resources.dont_have_account
 import cahatia.feature.login.generated.resources.forget_password
 import cahatia.feature.login.generated.resources.google_icon
 import cahatia.feature.login.generated.resources.login_title
+import cahatia.feature.login.generated.resources.login_with_facebook
 import cahatia.feature.login.generated.resources.login_with_google
 import cahatia.feature.login.generated.resources.or_login_with
 import cahatia.feature.login.generated.resources.password_icon
@@ -66,6 +68,7 @@ import com.chatia.ui.components.buttons.PrimaryButton
 import com.chatia.ui.components.inputFields.PrimaryInputField
 import com.chatia.ui.components.texts.PrimaryText
 import com.chatia.ui.components.verticalGradientStops
+import com.mmk.kmpauth.firebase.facebook.FacebookButtonUiContainer
 import com.mmk.kmpauth.google.GoogleButtonUiContainer
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -78,7 +81,7 @@ fun LoginUiContent(
     Column(
         modifier = Modifier
             .verticalGradientStops(
-                0.12f to Color(0xFFFFFFFF), 0.24f to Color(0xFFFFE5F9), 0.66f to Color(0xFFFFF7EB)
+//                0.12f to Color(0xFFFFFFFF), 0.24f to Color(0xFFFFE5F9), 0.66f to Color(0xFFFFF7EB)
             )
             .fillMaxSize()
             .applyIf(condition = isAndroid(), modifier = { padding(bottom = 8.dp) }),
@@ -110,17 +113,17 @@ fun LoginUiContent(
             Spacer(modifier = Modifier.height(32.dp))
             PrimaryInputField(
                 modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(48.dp),
-                colors = TextFieldDefaults.colors(
-                    focusedContainerColor = Color.White.copy(alpha = .5F),
-                    unfocusedContainerColor = Color.White.copy(alpha = .5F),
-                    disabledContainerColor = Color.White.copy(alpha = .5F),
-                    errorContainerColor = Color.White.copy(alpha = .5F),
-                    focusedIndicatorColor = MaterialTheme.colorScheme.primary,
-                    unfocusedIndicatorColor = Color.White,
-                    disabledIndicatorColor = Color.White.copy(alpha = 0.5f),
-                    errorIndicatorColor = Color.White
-                ),
+//                shape = RoundedCornerShape(48.dp),
+//                colors = TextFieldDefaults.colors(
+//                    focusedContainerColor = Color.White.copy(alpha = .5F),
+//                    unfocusedContainerColor = Color.White.copy(alpha = .5F),
+//                    disabledContainerColor = Color.White.copy(alpha = .5F),
+//                    errorContainerColor = Color.White.copy(alpha = .5F),
+//                    focusedIndicatorColor = MaterialTheme.colorScheme.primary,
+//                    unfocusedIndicatorColor = Color.White,
+//                    disabledIndicatorColor = Color.White.copy(alpha = 0.5f),
+//                    errorIndicatorColor = Color.White
+//                ),
                 placeholder = UiText.Resource(Res.string.username_placeholder).asString(),
                 value = loginViewState.loginUIModel.userName,
                 onValueChange = { onIntentChange.invoke(LoginIntent.UserNameUpdated(it)) }
@@ -128,17 +131,17 @@ fun LoginUiContent(
             Spacer(modifier = Modifier.height(16.dp))
             PrimaryInputField(
                 modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(48.dp),
-                colors = TextFieldDefaults.colors(
-                    focusedContainerColor = Color.White.copy(alpha = .5F),
-                    unfocusedContainerColor = Color.White.copy(alpha = .5F),
-                    disabledContainerColor = Color.White.copy(alpha = .5F),
-                    errorContainerColor = Color.White.copy(alpha = .5F),
-                    focusedIndicatorColor = MaterialTheme.colorScheme.primary,
-                    unfocusedIndicatorColor = Color.White,
-                    disabledIndicatorColor = Color.White.copy(alpha = 0.5f),
-                    errorIndicatorColor = Color.White
-                ),
+//                shape = RoundedCornerShape(48.dp),
+//                colors = TextFieldDefaults.colors(
+//                    focusedContainerColor = Color.White.copy(alpha = .5F),
+//                    unfocusedContainerColor = Color.White.copy(alpha = .5F),
+//                    disabledContainerColor = Color.White.copy(alpha = .5F),
+//                    errorContainerColor = Color.White.copy(alpha = .5F),
+//                    focusedIndicatorColor = MaterialTheme.colorScheme.primary,
+//                    unfocusedIndicatorColor = Color.White,
+//                    disabledIndicatorColor = Color.White.copy(alpha = 0.5f),
+//                    errorIndicatorColor = Color.White
+//                ),
                 placeholder = UiText.Resource(Res.string.password_placeholder).asString(),
                 value = loginViewState.loginUIModel.password,
                 onValueChange = { onIntentChange.invoke(LoginIntent.PasswordUpdated(it)) },
@@ -266,6 +269,62 @@ fun LoginUiContent(
                     }
                 )
             }
+
+            Spacer(modifier = Modifier.height(28.dp))
+
+            //Facebook button with icon
+//            FacebookButtonUiContainer(
+//                modifier = Modifier.fillMaxWidth().height(44.dp),
+//                onResult = { result -> /* handle result */ },
+//                linkAccount = false
+//            ) {
+//                PrimaryButton(
+//                    modifier = Modifier.height(52.dp).fillMaxWidth(),
+//                    buttonColors = ButtonDefaults.buttonColors(
+//                        containerColor = Color.White,
+//                    ),
+//                    text = UiText.Resource(Res.string.login_with_facebook).asString(),
+//                    onClick = { this.onClick() },
+//                    textFontWeight = FontWeight.Normal,
+//                    textColor = MaterialTheme.colorScheme.onSurface,
+//                    textFontSize = 16.sp,
+//                    icon = {
+//                        Icon(
+//                            modifier = Modifier.size(20.dp),
+//                            painter = painterResource(Res.drawable.google_icon),
+//                            contentDescription = UiText.Resource(Res.string.login_with_facebook)
+//                                .asString(),
+//                            tint = Color.Unspecified
+//                        )
+//                    }
+//                )
+//            }
+
+            PrimaryButton(
+                modifier = Modifier.height(52.dp).fillMaxWidth(),
+                buttonColors = ButtonDefaults.buttonColors(
+                    containerColor = Color.White,
+                ),
+                text = UiText.Resource(Res.string.login_with_google).asString(),
+                onClick = {
+                    onIntentChange.invoke(LoginIntent.OnFacebookLoginClicked)
+                },
+                textFontWeight = FontWeight.Normal,
+                textColor = MaterialTheme.colorScheme.onSurface,
+                textFontSize = 16.sp,
+                icon = {
+                    Icon(
+                        modifier = Modifier.size(20.dp),
+                        painter = painterResource(Res.drawable.google_icon),
+                        contentDescription = UiText.Resource(Res.string.login_with_google)
+                            .asString(),
+                        tint = Color.Unspecified
+                    )
+                }
+            )
+
+
+
             Spacer(modifier = Modifier.weight(1f))
             AuthenticationAnnotatedText(
                 firstText = UiText.Resource(Res.string.dont_have_account),

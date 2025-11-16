@@ -70,8 +70,10 @@ kotlin {
             implementation(libs.koin.compose)
             implementation(libs.koin.compose.viewmodel)
 
-            implementation("io.github.mirzemehdi:kmpauth-google:2.3.1") //Google One Tap Sign-In
-            implementation("io.github.mirzemehdi:kmpauth-firebase:2.3.1") //Integrated Authentications with Firebase
+            implementation("io.github.mirzemehdi:kmpauth-google:2.4.0-alpha03") //Google One Tap Sign-In
+            implementation("io.github.mirzemehdi:kmpauth-firebase:2.4.0-alpha03") //Integrated Authentications with Firebase
+            implementation("io.github.mirzemehdi:kmpauth-uihelper:2.4.0-alpha03") //UiHelper SignIn buttons (AppleSignIn, GoogleSignInButton)
+
             implementation("co.touchlab:kermit:2.0.8")
 
             implementation(project(":core:presentation"))

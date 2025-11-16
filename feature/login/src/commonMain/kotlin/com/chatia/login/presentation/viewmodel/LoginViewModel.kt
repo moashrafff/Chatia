@@ -60,6 +60,9 @@ class LoginViewModel(private val loginUseCase: LoginUseCase, ): ViewModel() {
             }
             is LoginIntent.RememberMeClicked -> toggleRememberMe()
             is LoginIntent.PasswordVisibleClicked -> togglePasswordVisibility()
+            LoginIntent.OnFacebookLoginClicked -> {
+                //todo
+            }
         }
     }
 
