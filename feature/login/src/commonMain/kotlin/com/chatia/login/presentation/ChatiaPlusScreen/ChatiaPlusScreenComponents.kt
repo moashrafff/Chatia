@@ -1,4 +1,4 @@
-package com.chatia.login.presentation
+package com.chatia.login.presentation.ChatiaPlusScreen
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -62,11 +62,12 @@ fun ContentCard() {
 @Composable
 fun RowCardContent(imageResource: DrawableResource, title: String, description: String) {
     Row(
-        modifier = Modifier.fillMaxWidth().padding(10.dp),
-        horizontalArrangement = Arrangement.Center
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.spacedBy(16.dp),
+        verticalAlignment = Alignment.Top
     ) {
         Icon(
-            modifier = Modifier.size(30.dp).padding(end = 8.dp),
+            modifier = Modifier.size(20.dp).padding(end = 8.dp),
             painter = painterResource(imageResource),
             contentDescription = "",
             tint = Color.Unspecified
@@ -90,4 +91,11 @@ fun RowCardContent(imageResource: DrawableResource, title: String, description: 
             )
         }
     }
+}
+
+
+
+
+enum class {
+
 }
