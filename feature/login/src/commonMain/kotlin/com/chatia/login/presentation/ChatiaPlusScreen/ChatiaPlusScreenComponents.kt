@@ -36,26 +36,33 @@ fun ContentCard() {
     Column(
         modifier = Modifier.fillMaxWidth().padding(15.dp)
     ) {
-        RowCardContent(
-            imageResource = Res.drawable.check_icon, title =
-                UiText.Resource(Res.string.seamless_ai_assistance).asString(),
-            description = UiText.Resource(Res.string.seamless_ai_assistance_description).asString()
-        )
-        RowCardContent(
-            imageResource = Res.drawable.check_icon, title =
-                UiText.Resource(Res.string.unlimited_access).asString(),
-            description = UiText.Resource(Res.string.unlimited_access_description).asString()
-        )
-        RowCardContent(
-            imageResource = Res.drawable.check_icon, title =
-                UiText.Resource(Res.string.availability).asString(),
-            description = UiText.Resource(Res.string.availability_description).asString()
-        )
-        RowCardContent(
-            imageResource = Res.drawable.check_icon, title =
-                UiText.Resource(Res.string.adaptive_learning).asString(),
-            description = UiText.Resource(Res.string.adaptive_learning_description).asString()
-        )
+        SubscriptionType.entries.forEach { subscriptionType ->
+            RowCardContent(
+                imageResource = subscriptionType.imageResource,
+                title = subscriptionType.title.asString(),
+                description = subscriptionType.description.asString(),
+            )
+        }
+//        RowCardContent(
+//            imageResource = Res.drawable.check_icon, title =
+//                UiText.Resource(Res.string.seamless_ai_assistance).asString(),
+//            description = UiText.Resource(Res.string.seamless_ai_assistance_description).asString()
+//        )
+//        RowCardContent(
+//            imageResource = Res.drawable.check_icon, title =
+//                UiText.Resource(Res.string.unlimited_access).asString(),
+//            description = UiText.Resource(Res.string.unlimited_access_description).asString()
+//        )
+//        RowCardContent(
+//            imageResource = Res.drawable.check_icon, title =
+//                UiText.Resource(Res.string.availability).asString(),
+//            description = UiText.Resource(Res.string.availability_description).asString()
+//        )
+//        RowCardContent(
+//            imageResource = Res.drawable.check_icon, title =
+//                UiText.Resource(Res.string.adaptive_learning).asString(),
+//            description = UiText.Resource(Res.string.adaptive_learning_description).asString()
+//        )
     }
 }
 
@@ -94,8 +101,26 @@ fun RowCardContent(imageResource: DrawableResource, title: String, description: 
 }
 
 
-
-
-enum class {
+enum class SubscriptionType(val imageResource: DrawableResource, val title: String, val description: String) {
+    SEAMLESS_AI_ASSISTANCE(
+        Res.drawable.check_icon,
+        Res.string.seamless_ai_assistance,
+        Res.string.seamless_ai_assistance_description
+    ),
+    UNLIMITED_ACCESS(
+        Res.drawable.unlimited_icon,
+        Res.string.unlimited_access,
+        Res.string.unlimited_access_description
+    ),
+    AVAILABILITY(
+        Res.drawable.availability_icon,
+        Res.string.availability,
+        Res.string.availability_description
+    ),
+    ADAPTIVE_LEARNING(
+        Res.drawable.availability_icon,
+        Res.string.adaptive_learning,
+        Res.string.adaptive_learning_description
+    )
 
 }
