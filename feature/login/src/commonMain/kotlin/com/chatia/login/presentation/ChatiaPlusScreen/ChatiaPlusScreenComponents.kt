@@ -101,26 +101,28 @@ fun RowCardContent(imageResource: DrawableResource, title: String, description: 
 }
 
 
-enum class SubscriptionType(val imageResource: DrawableResource, val title: String, val description: String) {
+enum class SubscriptionType(
+    val imageResource: DrawableResource, val title: UiText, val description: UiText
+) {
     SEAMLESS_AI_ASSISTANCE(
         Res.drawable.check_icon,
-        Res.string.seamless_ai_assistance,
-        Res.string.seamless_ai_assistance_description
+        UiText.Resource(Res.string.seamless_ai_assistance),
+        UiText.Resource(Res.string.seamless_ai_assistance_description)
     ),
     UNLIMITED_ACCESS(
-        Res.drawable.unlimited_icon,
-        Res.string.unlimited_access,
-        Res.string.unlimited_access_description
+        Res.drawable.check_icon,
+        UiText.Resource(Res.string.unlimited_access),
+        UiText.Resource(Res.string.unlimited_access_description)
     ),
     AVAILABILITY(
-        Res.drawable.availability_icon,
-        Res.string.availability,
-        Res.string.availability_description
+        Res.drawable.check_icon,
+        UiText.Resource(Res.string.availability),
+        UiText.Resource(Res.string.availability_description)
     ),
     ADAPTIVE_LEARNING(
-        Res.drawable.availability_icon,
-        Res.string.adaptive_learning,
-        Res.string.adaptive_learning_description
+        Res.drawable.check_icon,
+        UiText.Resource(Res.string.adaptive_learning),
+        UiText.Resource(Res.string.adaptive_learning_description)
     )
 
 }
