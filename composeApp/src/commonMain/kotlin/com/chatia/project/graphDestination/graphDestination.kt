@@ -1,25 +1,21 @@
 package com.chatia.project.graphDestination
 
 import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.window.Dialog
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.compose.LifecycleEventEffect
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
-import androidx.lifecycle.compose.LifecycleEventEffect
-import androidx.lifecycle.Lifecycle
-import com.chatia.login.presentation.EnablePermissionsScreen
-import com.chatia.login.presentation.ChaiaPlusSubcriptionScreen.ChatiaPlusSubscriptionScreen
+import com.chatia.login.presentation.PermissionsScreen.EnablePermissionsScreen
 import com.chatia.login.presentation.protocol.LoginEffect
 import com.chatia.login.presentation.screen.LoginScreen
 import com.chatia.login.presentation.viewmodel.LoginViewModel
@@ -40,7 +36,6 @@ import com.chatia.register.presentation.screen.RegisterScreen
 import com.chatia.register.presentation.viewmodel.RegisterViewmodel
 import org.koin.compose.getKoin
 import org.koin.compose.viewmodel.koinViewModel
-import org.koin.core.Koin
 
 private val composableDestinations: Map<NavigationDestination, @Composable (
     AppNavigator,

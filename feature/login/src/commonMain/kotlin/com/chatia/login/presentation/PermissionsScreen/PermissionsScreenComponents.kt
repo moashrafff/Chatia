@@ -17,10 +17,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.chatia.login.presentation.model.PermissionsInfoType
 import com.chatia.presentation.model.asString
 import com.chatia.login.presentation.PermissionsScreen.PermissionsInfoType
-import com.chatia.presentation.models.asString
 import com.chatia.ui.components.cards.PrimaryCard
 import com.chatia.ui.components.texts.PrimaryText
 import org.jetbrains.compose.resources.painterResource
