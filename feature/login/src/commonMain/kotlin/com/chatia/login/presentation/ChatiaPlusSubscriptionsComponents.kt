@@ -15,8 +15,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cahatia.feature.login.generated.resources.upgrade_to_plus
-import com.chatia.presentation.models.UiText
-import com.chatia.presentation.models.asString
+import com.chatia.presentation.model.UiText
+import com.chatia.presentation.model.asString
 import com.chatia.ui.components.buttons.PrimaryButton
 import com.chatia.ui.components.cards.PrimaryCard
 import com.chatia.ui.components.texts.PrimaryText

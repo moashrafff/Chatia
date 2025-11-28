@@ -14,7 +14,7 @@ import cahatia.feature.login.generated.resources.login_title
 import cahatia.feature.login.generated.resources.notification_access
 import cahatia.feature.login.generated.resources.notification_access_description
 import cahatia.feature.login.generated.resources.quote_up_circle
-import com.chatia.presentation.models.UiText
+import com.chatia.presentation.model.UiText
 import org.jetbrains.compose.resources.DrawableResource
 
 enum class PermissionsInfoType(val title: UiText, val icon: DrawableResource, val description: UiText) {

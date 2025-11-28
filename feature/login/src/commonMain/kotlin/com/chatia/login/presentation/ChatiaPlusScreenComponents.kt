@@ -25,8 +25,8 @@ import cahatia.feature.login.generated.resources.seamless_ai_assistance
 import cahatia.feature.login.generated.resources.seamless_ai_assistance_description
 import cahatia.feature.login.generated.resources.unlimited_access
 import cahatia.feature.login.generated.resources.unlimited_access_description
-import com.chatia.presentation.models.UiText
-import com.chatia.presentation.models.asString
+import com.chatia.presentation.model.UiText
+import com.chatia.presentation.model.asString
 import com.chatia.ui.components.texts.PrimaryText
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource

@@ -22,8 +22,8 @@ import cahatia.feature.login.generated.resources.confirm_email_description
 import cahatia.feature.login.generated.resources.continue_text
 import cahatia.feature.login.generated.resources.resend_in
 import com.chatia.presentation.applyIf
-import com.chatia.presentation.models.UiText
-import com.chatia.presentation.models.asString
+import com.chatia.presentation.model.UiText
+import com.chatia.presentation.model.asString
 import com.chatia.presentation.resources.chatia_logo
 import com.chatia.presentation.resources.chatia_logo_content_description
 import com.chatia.project.isAndroid

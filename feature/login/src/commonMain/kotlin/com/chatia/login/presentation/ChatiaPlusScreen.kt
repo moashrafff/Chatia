@@ -25,8 +25,8 @@ import cahatia.feature.login.generated.resources.chatia_plus_unlock
 import cahatia.feature.login.generated.resources.chatia_plus_unlock_description
 import cahatia.feature.login.generated.resources.upgrade_to_plus
 import com.chatia.presentation.applyIf
-import com.chatia.presentation.models.UiText
-import com.chatia.presentation.models.asString
+import com.chatia.presentation.model.UiText
+import com.chatia.presentation.model.asString
 import com.chatia.project.isAndroid
 import com.chatia.ui.components.buttons.PrimaryButton
 import com.chatia.ui.components.cards.PrimaryCard

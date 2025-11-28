@@ -10,6 +10,7 @@ import com.chatia.login.data.repoImpl.LoginRepositoryImpl
 import com.chatia.login.domain.model.User
 import com.chatia.login.domain.repo.LoginRepository
 import com.chatia.login.domain.usecase.LoginUseCase
+import com.chatia.presentation.permission.PermissionBridge
 import com.chatia.login.presentation.viewmodel.LoginViewModel
 import org.koin.core.qualifier.named
 import org.koin.core.module.dsl.viewModel
@@ -22,6 +23,9 @@ private val LOGIN_MAPPER = named("LOGIN_MAPPER")
 
 val loginModule = module {
 
+    single<PermissionBridge> {
+        PermissionBridge()
+    }
     // Mappers
     single<Mapper<LoginResponseDto, User>>(LOGIN_MAPPER) { LoginDtoMapper() }
 

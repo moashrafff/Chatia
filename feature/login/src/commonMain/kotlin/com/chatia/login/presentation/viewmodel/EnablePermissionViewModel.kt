@@ -1,4 +1,7 @@
 package com.chatia.login.presentation.viewmodel
 
-class EnablePermissionViewModel {
+import androidx.lifecycle.ViewModel
+
+class EnablePermissionViewModel : ViewModel() {
+    // TODO: Implement the ViewModel
 }
