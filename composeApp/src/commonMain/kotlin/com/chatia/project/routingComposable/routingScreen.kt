@@ -61,7 +61,7 @@ fun AppScaffold(
             NavHost(
                 modifier = Modifier.padding(it),
                 navController = navController,
-                startDestination = Screens.OnBoardingScreenRoute.route,
+                startDestination = Screens.PermissionsScreenRoute.route,
                 enterTransition = { fadeIn(animationSpec = tween(500)) },
                 exitTransition = { fadeOut(animationSpec = tween(500)) },
             ) {

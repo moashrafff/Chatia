@@ -11,6 +11,59 @@
     <string name="login_with_apple">Login with Apple</string>
     <string name="dont_have_account">Don’t have an account? </string>
     <string name="create_an_account">Create an Account</string>
+    <string name="enable_permissions">Enable Permission</string>
+    <string name="notification_access">Notification Access</string>
+    <string name="calender_access">Calender Access</string>
+    <string name="location_access">Location Access</string>
+    <string name="gallery_access">Gallery or File Access</string>
+    <string name="enable_permissions_description">Allow access to enhance functionality and improve experience</string>
+
+    <string name="notification_access_description">Allow access to enEnable notifications to receive timely updates and stay informed about important alerts.</string>
+    <string name="calender_access_description">Grant calender access to help schedule , track , events ,and receive mar AI reminders </string>
+    <string name="location_access_description">Allow location access or personalized recommendations and local support based on your area </string>
+    <string name="gallery_access_description">Provide gallery access to easily upload , share , and organize images or documents within the app</string>
+
+
+    <string name="chatia_plus_unlock">Chatia Plus Unlock</string>
+    <string name="chatia_plus_unlock_description">Exclusive perks await with premium chatia plus subscriptions today</string>
+
+    <string name="upgrade_to_plus">Upgrade to Plus</string>
+
+    <string name="seamless_ai_assistance">Seamless AI Assistance</string>
+    <string name="unlimited_access">Unlimited Access</string>
+
+    <string name="availability">24/7 Availability</string>
+
+    <string name="adaptive_learning">Adaptive Learning</string>
+
+    <string name="confirm_email">Confirm your email</string>
+    <string name="confirm_email_description">Please enter the 4-digit code we sent to your email to continue</string>
+
+    <string name="continue_text">Continue</string>
+    <string name="resend_in">Resend in 10s</string>
+
+
+    <string name="chatia_subscriptions">Get Chatia Plus Subscriptions</string>
+    <string name="chatia_subscriptions_description">Allow access to enhance your experience nd unlock all features</string>
+    <string name="basic_plan">Basic Plan</string>
+    <string name="basic_plan_description">Perfect for personal use with basic features and 100 monthly messages</string>
+
+    <string name="pro_plan">Pro Plan</string>
+    <string name="pro_plan_description">Designed for small businesses with team features , analytics and 500 messages per month </string>
+
+    <string name="enterprise_plan">Enterprise Plan</string>
+    <string name="enterprise_plan_description">Built for team and organizations including team collaboration tools , analytica ,priority support , and 1000 monthly messages</string>
+
+
+
+
+    <string name="seamless_ai_assistance_description">Get instant, smart, and personalized responses anytime you need them</string>
+    <string name="unlimited_access_description">Enjoy unlimited chat and assistance without restrictions on usage</string>
+
+    <string name="availability_description">Connect with chatia at any time of day , ensuring you are never without support </string>
+
+    <string name="adaptive_learning_description">Chatia improves over time getting smarter with every interaction to better meet you need </string>
+
     <string name="incorrect_password">Incorrect Password</string>
     <string name="incorrect_password_length">Incorrect Password Length</string>
     <string name="empty_text"> </string>
