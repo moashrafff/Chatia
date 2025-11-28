@@ -9,7 +9,7 @@ import androidx.compose.runtime.getValue
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
-import com.chatia.login.presentation.ChatiaPlusSubscriptionScreen
+import com.chatia.login.presentation.ChaiaPlusSubcriptionScreen.ChatiaPlusSubscriptionScreen
 import com.chatia.login.presentation.protocol.LoginEffect
 import com.chatia.login.presentation.screen.LoginScreen
 import com.chatia.login.presentation.viewmodel.LoginViewModel
@@ -66,6 +66,14 @@ private val composableDestinations: Map<NavigationDestination, @Composable (
         LoginScreen(
             stateRenderer = stateRenderer, onIntentChange = viewmodel::sendIntent
         )
+    },
+    PermissionsScreenDestination to { appNavigator, navHostController ->
+//        EnablePermissionsScreen()
+        val remeberListState = remember { mutableStateListOf("","","","")  }// save till implement full OTP cycle
+//        OTPScreen(remeberListState)
+        ChatiaPlusSubscriptionScreen()
+    }
+)
     }, RegisterDestination to { appNavigator, navHostController ->
         val viewmodel: RegisterViewmodel = koinViewModel()
         val stateRenderer by viewmodel.stateRendererFlow.collectAsState()

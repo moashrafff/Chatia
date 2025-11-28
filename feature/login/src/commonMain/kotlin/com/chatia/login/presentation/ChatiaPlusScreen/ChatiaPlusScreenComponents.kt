@@ -1,4 +1,4 @@
-package com.chatia.login.presentation
+package com.chatia.login.presentation.ChatiaPlusScreen
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -36,37 +36,45 @@ fun ContentCard() {
     Column(
         modifier = Modifier.fillMaxWidth().padding(15.dp)
     ) {
-        RowCardContent(
-            imageResource = Res.drawable.check_icon, title =
-                UiText.Resource(Res.string.seamless_ai_assistance).asString(),
-            description = UiText.Resource(Res.string.seamless_ai_assistance_description).asString()
-        )
-        RowCardContent(
-            imageResource = Res.drawable.check_icon, title =
-                UiText.Resource(Res.string.unlimited_access).asString(),
-            description = UiText.Resource(Res.string.unlimited_access_description).asString()
-        )
-        RowCardContent(
-            imageResource = Res.drawable.check_icon, title =
-                UiText.Resource(Res.string.availability).asString(),
-            description = UiText.Resource(Res.string.availability_description).asString()
-        )
-        RowCardContent(
-            imageResource = Res.drawable.check_icon, title =
-                UiText.Resource(Res.string.adaptive_learning).asString(),
-            description = UiText.Resource(Res.string.adaptive_learning_description).asString()
-        )
+        SubscriptionType.entries.forEach { subscriptionType ->
+            RowCardContent(
+                imageResource = subscriptionType.imageResource,
+                title = subscriptionType.title.asString(),
+                description = subscriptionType.description.asString(),
+            )
+        }
+//        RowCardContent(
+//            imageResource = Res.drawable.check_icon, title =
+//                UiText.Resource(Res.string.seamless_ai_assistance).asString(),
+//            description = UiText.Resource(Res.string.seamless_ai_assistance_description).asString()
+//        )
+//        RowCardContent(
+//            imageResource = Res.drawable.check_icon, title =
+//                UiText.Resource(Res.string.unlimited_access).asString(),
+//            description = UiText.Resource(Res.string.unlimited_access_description).asString()
+//        )
+//        RowCardContent(
+//            imageResource = Res.drawable.check_icon, title =
+//                UiText.Resource(Res.string.availability).asString(),
+//            description = UiText.Resource(Res.string.availability_description).asString()
+//        )
+//        RowCardContent(
+//            imageResource = Res.drawable.check_icon, title =
+//                UiText.Resource(Res.string.adaptive_learning).asString(),
+//            description = UiText.Resource(Res.string.adaptive_learning_description).asString()
+//        )
     }
 }
 
 @Composable
 fun RowCardContent(imageResource: DrawableResource, title: String, description: String) {
     Row(
-        modifier = Modifier.fillMaxWidth().padding(10.dp),
-        horizontalArrangement = Arrangement.Center
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.spacedBy(16.dp),
+        verticalAlignment = Alignment.Top
     ) {
         Icon(
-            modifier = Modifier.size(30.dp).padding(end = 8.dp),
+            modifier = Modifier.size(20.dp).padding(end = 8.dp),
             painter = painterResource(imageResource),
             contentDescription = "",
             tint = Color.Unspecified
@@ -90,4 +98,31 @@ fun RowCardContent(imageResource: DrawableResource, title: String, description: 
             )
         }
     }
+}
+
+
+enum class SubscriptionType(
+    val imageResource: DrawableResource, val title: UiText, val description: UiText
+) {
+    SEAMLESS_AI_ASSISTANCE(
+        Res.drawable.check_icon,
+        UiText.Resource(Res.string.seamless_ai_assistance),
+        UiText.Resource(Res.string.seamless_ai_assistance_description)
+    ),
+    UNLIMITED_ACCESS(
+        Res.drawable.check_icon,
+        UiText.Resource(Res.string.unlimited_access),
+        UiText.Resource(Res.string.unlimited_access_description)
+    ),
+    AVAILABILITY(
+        Res.drawable.check_icon,
+        UiText.Resource(Res.string.availability),
+        UiText.Resource(Res.string.availability_description)
+    ),
+    ADAPTIVE_LEARNING(
+        Res.drawable.check_icon,
+        UiText.Resource(Res.string.adaptive_learning),
+        UiText.Resource(Res.string.adaptive_learning_description)
+    )
+
 }

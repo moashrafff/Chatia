@@ -1,4 +1,4 @@
-package com.chatia.login.presentation
+package com.chatia.login.presentation.ChaiaPlusSubcriptionScreen
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,6 +14,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import cahatia.feature.login.generated.resources.Res
 import cahatia.feature.login.generated.resources.upgrade_to_plus
 import com.chatia.presentation.models.UiText
 import com.chatia.presentation.models.asString
@@ -41,7 +42,7 @@ fun ListContent() {
     }
     PrimaryButton(
         modifier = Modifier.height(52.dp).fillMaxWidth().padding(horizontal = 18.dp),
-        text = UiText.Resource(cahatia.feature.login.generated.resources.Res.string.upgrade_to_plus)
+        text = UiText.Resource(Res.string.upgrade_to_plus)
             .asString(),
         onClick = { /*TODO*/ },
         textFontWeight = FontWeight.Normal,
