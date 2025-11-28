@@ -1,4 +1,4 @@
-package com.chatia.login.presentation
+package com.chatia.login.presentation.OTPScreen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border

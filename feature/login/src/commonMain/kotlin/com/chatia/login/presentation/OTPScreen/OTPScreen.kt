@@ -1,4 +1,4 @@
-package com.chatia.login.presentation
+package com.chatia.login.presentation.OTPScreen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
@@ -16,16 +16,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import cahatia.feature.login.generated.resources.enable_permissions
-import cahatia.feature.login.generated.resources.enable_permissions_description
-import com.chatia.login.presentation.model.PermissionsInfoType
+import cahatia.feature.login.generated.resources.Res
+import cahatia.feature.login.generated.resources.confirm_email
+import cahatia.feature.login.generated.resources.confirm_email_description
+import cahatia.feature.login.generated.resources.continue_text
+import cahatia.feature.login.generated.resources.resend_in
 import com.chatia.presentation.applyIf
 import com.chatia.presentation.model.UiText
 import com.chatia.presentation.model.asString
-import com.chatia.presentation.permission.PermissionBridge
-import com.chatia.presentation.permission.PermissionResultCallback
-import com.chatia.presentation.permission.PermissionState
-import com.chatia.presentation.permission.PermissionsBridgeListener
 import com.chatia.presentation.resources.chatia_logo
 import com.chatia.presentation.resources.chatia_logo_content_description
 import com.chatia.project.isAndroid
@@ -33,12 +31,10 @@ import com.chatia.ui.components.buttons.PrimaryButton
 import com.chatia.ui.components.texts.PrimaryText
 import com.chatia.ui.components.verticalGradientStops
 import org.jetbrains.compose.resources.painterResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
+
 
 @Composable
-fun EnablePermissionsScreen(
-    onEnablePermissionsButtonClick: () -> Unit
-) {
+fun OTPScreen(optNumbersState: MutableList<String>) {
     Column(
         modifier = Modifier.verticalGradientStops(
             0.12f to Color(0xFFFFFFFF), 0.24f to Color(0xFFFFE5F9), 0.66f to Color(0xFFFFF7EB)
@@ -55,50 +51,49 @@ fun EnablePermissionsScreen(
         )
         Spacer(modifier = Modifier.height(24.dp))
         PrimaryText(
-            text = UiText.Resource(cahatia.feature.login.generated.resources.Res.string.enable_permissions)
+            text = UiText.Resource(Res.string.confirm_email)
                 .asString(),
             fontWeight = FontWeight.Medium,
             fontSize = 24.sp,
             textAlign = TextAlign.Center,
             lineHeight = 32.sp
         )
-        Spacer(modifier = Modifier.height(12.dp))
         PrimaryText(
-            text = UiText.Resource(cahatia.feature.login.generated.resources.Res.string.enable_permissions_description)
+            modifier = Modifier.padding(horizontal = 18.dp),
+            text = UiText.Resource(Res.string.confirm_email_description)
                 .asString(),
+            fontWeight = FontWeight.Normal,
+            textAlign = TextAlign.Center,
+        )
+        Spacer(modifier = Modifier.height(12.dp))
+        //
+        //
+
+        Column(
+            modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+//            val remeberListState = remember { mutableStateListOf(0,0,0,0,0,0)  }
+
+            OTPFeilds(otpNumbersState = optNumbersState)
+        }
+
+        PrimaryText(
+            text = UiText.Resource(Res.string.resend_in).asString(),
             fontWeight = FontWeight.Normal,
             textAlign = TextAlign.Center
         )
-        Spacer(modifier = Modifier.height(12.dp))
-
-        Column(
-            modifier = Modifier.fillMaxWidth().weight(1f).padding(horizontal = 16.dp)
-        ) {
-            PermissionsInfoType.entries.forEachIndexed { index, it ->
-                AccessPermissionsInfoCard(
-                    modifier = Modifier, infoType = it
-                )
-                if (index != PermissionsInfoType.entries.lastIndex) Spacer(Modifier.height(12.dp))
-            }
-        }
+        Spacer(modifier = Modifier.padding(142.dp))
+//        Spacer(modifier = Modifier.weight(0.1f))
 
         PrimaryButton(
             modifier = Modifier.height(52.dp).fillMaxWidth().padding(horizontal = 18.dp),
-            text = UiText.Resource(cahatia.feature.login.generated.resources.Res.string.enable_permissions)
+            text = UiText.Resource(Res.string.continue_text)
                 .asString(),
-            onClick = onEnablePermissionsButtonClick,
+            onClick = { /*TODO*/ },
             textFontWeight = FontWeight.Normal,
-            textFontSize = 16.sp
+            textFontSize = 16.sp,
         )
-        Spacer(modifier = Modifier.weight(0.1f))
-
+//        Spacer(modifier = Modifier.weight(0.1f))
     }
-}
-
-
-
-@Preview
-@Composable
-fun PreviewOTPScreen() {
-    EnablePermissionsScreen({})
 }

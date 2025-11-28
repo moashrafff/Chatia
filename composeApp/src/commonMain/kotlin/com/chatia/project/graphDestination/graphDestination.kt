@@ -19,6 +19,7 @@ import androidx.navigation.compose.composable
 import androidx.lifecycle.compose.LifecycleEventEffect
 import androidx.lifecycle.Lifecycle
 import com.chatia.login.presentation.EnablePermissionsScreen
+import com.chatia.login.presentation.ChaiaPlusSubcriptionScreen.ChatiaPlusSubscriptionScreen
 import com.chatia.login.presentation.protocol.LoginEffect
 import com.chatia.login.presentation.screen.LoginScreen
 import com.chatia.login.presentation.viewmodel.LoginViewModel
@@ -115,7 +116,7 @@ private val composableDestinations: Map<NavigationDestination, @Composable (
                     } else {
                         "the necessary permissions"
                     }
-                    
+
                     Text(
                         text = if (isPermanentDenial) {
                             "You denied: $deniedList. Please go to Settings to enable them manually."

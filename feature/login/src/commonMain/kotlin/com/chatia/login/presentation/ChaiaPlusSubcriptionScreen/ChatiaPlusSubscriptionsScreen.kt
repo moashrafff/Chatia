@@ -1,15 +1,12 @@
-package com.chatia.login.presentation
+package com.chatia.login.presentation.ChaiaPlusSubcriptionScreen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -21,21 +18,18 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cahatia.feature.login.generated.resources.Res
 import cahatia.feature.login.generated.resources.chatia_logo_plus
-import cahatia.feature.login.generated.resources.chatia_plus_unlock
-import cahatia.feature.login.generated.resources.chatia_plus_unlock_description
-import cahatia.feature.login.generated.resources.upgrade_to_plus
+import cahatia.feature.login.generated.resources.chatia_subscriptions
+import cahatia.feature.login.generated.resources.chatia_subscriptions_description
 import com.chatia.presentation.applyIf
 import com.chatia.presentation.model.UiText
 import com.chatia.presentation.model.asString
 import com.chatia.project.isAndroid
-import com.chatia.ui.components.buttons.PrimaryButton
-import com.chatia.ui.components.cards.PrimaryCard
 import com.chatia.ui.components.texts.PrimaryText
 import com.chatia.ui.components.verticalGradientStops
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
-fun ChatiaPlusScreen() {
+fun ChatiaPlusSubscriptionScreen() {
     Column(
         modifier = Modifier.verticalGradientStops(
             0.12f to Color(0xFFFFFFFF), 0.24f to Color(0xFFFFE5F9), 0.66f to Color(0xFFFFF7EB)
@@ -51,7 +45,7 @@ fun ChatiaPlusScreen() {
         )
         Spacer(modifier = Modifier.height(24.dp))
         PrimaryText(
-            text = UiText.Resource(Res.string.chatia_plus_unlock).asString(),
+            text = UiText.Resource(Res.string.chatia_subscriptions).asString(),
             fontWeight = FontWeight.Medium,
             fontSize = 24.sp,
             textAlign = TextAlign.Center,
@@ -59,35 +53,17 @@ fun ChatiaPlusScreen() {
         )
         Spacer(modifier = Modifier.height(12.dp))
         PrimaryText(
-            modifier = Modifier.padding(horizontal = 8.dp),
-            text = UiText.Resource(Res.string.chatia_plus_unlock_description).asString(),
+            modifier = Modifier.padding(horizontal = 22.dp),
+            text = UiText.Resource(Res.string.chatia_subscriptions_description).asString(),
             fontWeight = FontWeight.Normal,
             textAlign = TextAlign.Center,
             color = MaterialTheme.colorScheme.onSecondary
         )
         Spacer(modifier = Modifier.height(12.dp))
+        ListContent()
+        Spacer(modifier = Modifier.height(12.dp))
 
-        PrimaryCard(
-            modifier = Modifier.fillMaxWidth().padding(10.dp),
-            withElevation = false,
-            cardColors = CardDefaults.cardColors(
-                containerColor = Color.White
-            ),
-            shape = RoundedCornerShape(20.dp),
-            enabled = false,
-            content = {
-                ContentCard()
-            }
-        )
-        Spacer(modifier = Modifier.padding(18.dp))
 
-        PrimaryButton(
-            modifier = Modifier.height(52.dp).fillMaxWidth().padding(horizontal = 18.dp),
-            text = UiText.Resource(Res.string.upgrade_to_plus)
-                .asString(),
-            onClick = { /*TODO*/ },
-            textFontWeight = FontWeight.Normal,
-            textFontSize = 16.sp
-        )
     }
 }
+
